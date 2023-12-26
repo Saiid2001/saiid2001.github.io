@@ -1,0 +1,21 @@
+{
+  "personalEmail": "saidhajjchehade@gmail.com",
+  "shortBio": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam dolorem accusantium pariatur ullam, similique porro ipsa dolor sint qui enim recusandae tenetur eligendi.",
+  "occupation": {
+    "title": "PhD Candidate",
+    "institution": "EPFL",
+    "institutionWebsite": "https://www.epfl.ch/en/",
+    "profileWebsite": "https://people.epfl.ch/saiid.elhajjchehade",
+    "email": "saiid.elhajjchehade@epfl.ch",
+    "phone": "+41 21 693 99 77",
+    "since": "2023-09-01",
+    "address": [
+        "EPFL IC IINFCOM SPRING",
+        "BC 266 (Bâtiment BC)",
+        "Station 14",
+        "CH-1015 Lausanne"
+    ],
+    "image": "https://actu.epfl.ch/image/92055/1108x622.jpg",
+    "description": "I am part of the [SPRING lab](https://spring.epfl.ch), under the supervision of [Prof. Carmela Troncoso](http://carmelatroncoso.com/). My research interests include web privacy, web security, and privacy-preserving system design. "
+  }
+}

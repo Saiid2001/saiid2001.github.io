@@ -16,7 +16,7 @@ module.exports = {
           light: "#5e94a1",
         },
         secondary:{
-          DEFAULT: "#fdc944",
+          DEFAULT: "#f0aa0f",
           light : "#fae782",
         },
         gray: {
@@ -40,7 +40,7 @@ module.exports = {
         light: {
           ...require("daisyui/src/theming/themes")["light"],
           primary: "#517a8b",
-          secondary: "#fdc944"
+          secondary: "#f0aa0f"
         },
         dark: {
           ...require("daisyui/src/theming/themes")["dark"],
