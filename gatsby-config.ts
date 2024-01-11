@@ -13,7 +13,7 @@ const config: GatsbyConfig = {
     "gatsby-plugin-postcss",
     "gatsby-plugin-image",
     "gatsby-plugin-sitemap",
-    "gatsby-plugin-fontawesome-css",
+    "gatsby-plugin-fontawesome",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
