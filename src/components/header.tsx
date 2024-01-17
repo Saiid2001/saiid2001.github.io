@@ -11,14 +11,14 @@ const Header: React.FC<HeaderProps> = (props) => {
 
   return (
     <header className="p-8 flex w-full justify-between items-center">
-      <h1 className="font-bold text-primary">SAIID</h1>
+      <h1 className="font-bold text-2xl text-primary w-52">SAIID</h1>
       <nav className="flex gap-4 items-center justify-center grow">
         <a className="btn btn-ghost">Home</a>
         <a className="btn btn-ghost">Blog</a>
         <a className="btn btn-ghost">Projects</a>
         <a className="btn btn-ghost">Publications</a>
       </nav>
-      <div className="flex gap-2">
+      <div className="flex gap-2 w-52 justify-end">
       
         {props.theme=="dark"?<button className="btn btn-ghost rounded-full" onClick={()=>props.onToggleTheme("light")}>
           <FontAwesomeIcon icon={faSun} />

@@ -29,7 +29,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
   }, [theme]);
 
   return (
-    <main>
+    <main className="w-[100rem] max-w-full mx-auto">
       <Header theme={theme} onToggleTheme={setTheme} />
       <div>{props.children}</div>
       <script src="./node_modules/preline/dist/preline.js"></script>

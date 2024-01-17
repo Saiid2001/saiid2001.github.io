@@ -24,6 +24,9 @@ module.exports = {
         light: "#bbbbbb",
         }
       },
+      screens: {
+        '3xl': '1930px',
+      }
     },
   },
   plugins: [require('daisyui'),],

@@ -3,7 +3,7 @@ import type { HeadFC, PageProps } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faPhone, faEnvelope, faUser } from "@fortawesome/free-solid-svg-icons";
 import { faGithub, faLinkedin , faGoogleScholar, faXTwitter} from "@fortawesome/free-brands-svg-icons";
-import ReactMarkdpwm from "react-markdown";
+import ReactMarkdown from "react-markdown";
 import Img from 'gatsby-image';
 import Layout from "../components/layout";
 import info from "../data/info.json";
@@ -28,7 +28,7 @@ const IndexPage: React.FC<PageProps> = (props) => {
           <p>Hello, I'm</p>
           <h1 className="font-bold text-2xl mb-4">SAIID EL HAJJ CHEHADE</h1>
 
-          <ReactMarkdpwm children={info.shortBio}/>
+          <ReactMarkdown children={info.shortBio}/>
 
           <div className="mt-4">
             <a className="btn btn-secondary">
@@ -38,32 +38,32 @@ const IndexPage: React.FC<PageProps> = (props) => {
         </div>
       </section>
 
-      {/* SOCIAL MEDIA */}
-      <section className="flex w-full px-8 mt-4">
-        <div className="w-4/6">
+      {/* SOCIAL SECTION */}
+      <section className="flex w-full gap-4 px-8 mt-4 max-2xl:flex-col">
+        <div className="w-4/6 max-2xl:w-full flex flex-col gap-4 max-2xl:flex-row max-md:flex-col">
           {/* SOCIAL MEDIA BUTTONS */}
-          <div className="grid grid-cols-4 gap-2">
-            <a className="btn">
+          <div className="grid grid-cols-4 gap-2 max-2xl:grid-rows-4 max-2xl:grid-cols-none max-md:grid-cols-4 max-md:grid-rows-none">
+            <a className="btn w-full max-2xl:h-full max-2xl:flex-col">
               <FontAwesomeIcon icon={faLinkedin} /> LinkedIn
             </a>
-            <a className="btn">
+            <a className="btn w-full max-2xl:h-full max-2xl:flex-col">
               <FontAwesomeIcon icon={faGithub} /> Github
             </a>
-            <a className="btn">
+            <a className="btn w-full max-2xl:h-full max-2xl:flex-col">
               <FontAwesomeIcon icon={faGoogleScholar} /> Scholar
             </a>
-            <a className="btn">
+            <a className="btn w-full max-2xl:h-full max-2xl:flex-col">
               <FontAwesomeIcon icon={faXTwitter} /> X
             </a>
           </div>
 
           {/* CURRENT OCCUPATION */}
-          <div className="mt-4 bg-primary/10 flex flex-row justify-between rounded-lg">
+          <div className=" bg-primary/10 flex flex-row justify-between rounded-lg relative">
 
             <div className="p-8">
               <p>Currently I am a</p>
               <h1 className="text-2xl">{info.occupation.title} at <a className="text-primary font-bold" href={info.occupation.institutionWebsite}>{info.occupation.institution}</a></h1>
-              <ReactMarkdpwm children={info.occupation.description} className={"mt-2"}/>
+              <ReactMarkdown children={info.occupation.description} className={"mt-2"}/>
               {/* ADDRESS */}
               <div className="mt-2 flex justify-between">
                 <section>
@@ -87,11 +87,11 @@ const IndexPage: React.FC<PageProps> = (props) => {
               </div>
             </div>
 
-            <img src={info.occupation.image} className="w-60 object-cover object-bottom rounded-lg"/>
+            <img src={info.occupation.image} className="w-80 object-cover object-bottom rounded-lg max-lg:opacity-10 max-lg:absolute max-lg:-z-10 max-lg:left-0 max-lg:top-0 max-lg:h-full max-lg:w-full"/>
             
           </div>
         </div>
-        <div className="w-2/6 pl-4">
+        <div className="w-2/6 max-2xl:w-full">
           <LatestNews/>
         </div>
       </section>
