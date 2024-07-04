@@ -57,3 +57,14 @@ a {
     rgba(58, 54, 51, 0) 100%
   );
 }
+
+
+/* rgb(241 215 199 / 50%) */
+
+[data-theme='light'] .gradient-overlay-2 {
+  background: linear-gradient(
+    90deg,
+    rgb(241 215 199 / 50%) 0%,
+    rgba(241, 215, 199, 0) 100%
+  );
+}

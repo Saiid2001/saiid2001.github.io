@@ -38,7 +38,6 @@ const Layout: React.FC<LayoutProps> = (props) => {
       <Header theme={theme} onToggleTheme={setTheme} />
       <div>{props.children}</div>
       <Footer currPath=""/>
-      <script src="./node_modules/preline/dist/preline.js"></script>
     </main>
     </>
   );
