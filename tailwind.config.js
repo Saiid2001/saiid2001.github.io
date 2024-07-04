@@ -6,18 +6,19 @@ module.exports = {
   content: [
     `./src/pages/**/*.{js,jsx,ts,tsx}`,
     `./src/components/**/*.{js,jsx,ts,tsx}`,
+    `./src/sections/**/*.{js,jsx,ts,tsx}`,
     'node_modules/preline/dist/*.js',
   ],
   theme: {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#517a8b",
-          light: "#5e94a1",
+          DEFAULT: "#1B1A17",
+          light: "#262420",
         },
         secondary:{
-          DEFAULT: "#f0aa0f",
-          light : "#fae782",
+          DEFAULT: "#E45826",
+          light : "#E6D5B8",
         },
         gray: {
           DEFAULT: "#aaaaaa",
@@ -28,8 +29,12 @@ module.exports = {
         '3xl': '1930px',
       }
     },
+    fontFamily: {
+      sans: ['"Maven Pro"', 'sans-serif'],
+      mono: ['"Ubuntu Mono"', 'monospace']
+    },
   },
-  plugins: [require('daisyui'),],
+  plugins: [require('daisyui')],
   safelist: [
     "bg-primary",
     "bg-secondary",
@@ -42,13 +47,17 @@ module.exports = {
       {
         light: {
           ...require("daisyui/src/theming/themes")["light"],
+          "base-100": "#FFF9F0",
+          "base-content": "#1B1A17",
           primary: "#517a8b",
-          secondary: "#f0aa0f"
+          secondary: "#E45826",
         },
         dark: {
           ...require("daisyui/src/theming/themes")["dark"],
-          primary: "#517a8b",
-          secondary: "#fdc944"
+          "base-100": "#1B1A17",
+          "base-content": "#E6D5B8", 
+          primary: "#1B1A17",
+          secondary: "#E45826"
         }
       }
     ]

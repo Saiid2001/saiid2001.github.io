@@ -1,0 +1,60 @@
+:root {
+  --github-logo: url("../images/svg/github-logo.svg");
+  --x-logo: url("../images/svg/x-logo.svg");
+  --linkedin-logo: url("../images/svg/linkedin-logo.svg");
+  --scholar-logo: url("../images/svg/scholar-logo.svg");
+}
+
+.hover-button {
+  background-color: #e45926ec;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  /* border: 1px solid #e45926a4; */
+}
+
+.hover-button::before {
+  background: radial-gradient(
+    300px circle at var(--mouse-x, -1000%) var(--mouse-y, -1000%),
+    #ff9a57 0%,
+    transparent 40%
+  );
+  border-radius: inherit;
+  content: "";
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  z-index: 2;
+}
+
+.hover-button::after {
+  background: url("../images/noise.svg");
+  content: "";
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  z-index: 4;
+  /* blending mode */
+  mix-blend-mode: multiply;
+}
+
+.hover-button > span {
+  position: absolute;
+  z-index: 3;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: var(--logo);
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+  mix-blend-mode: multiply;
+}

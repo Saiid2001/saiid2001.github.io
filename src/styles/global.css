@@ -2,25 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --rounded-btn: 0.3rem;
+  --border-btn: 2px;
+}
+
+.toggle {
+  --rounded-badge: 0.3rem;
+  border-width: 2px;
+}
+
+.toggle-icon.toggle-icon-checked {
+  translate: -2rem 0;
+}
+
 * {
   box-sizing: border-box;
 }
 
-a { 
+a {
   @apply text-secondary font-bold;
 }
 
-.arabeque-bg{
-background-image: url("../images/arabesque.png");
-/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+.arabeque-bg {
+  background-image: url("../images/arabesque.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 /* blurry edges mask */
-.edges-blur{
-
-  mask-image: linear-gradient(0deg, rgba(0,0,0,0) 12%, rgba(0,0,0,1) 48%, rgba(0,0,0,1) 100%);
+.edges-blur {
+  mask-image: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 12%,
+    rgba(0, 0, 0, 1) 48%,
+    rgba(0, 0, 0, 1) 100%
+  );
   mask-size: 100% 100%;
   mask-repeat: no-repeat;
   mask-position: bottom left;
+}
 
+.gradient-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(242, 123, 80, 0) 7.72%,
+    rgba(255, 67, 0, 0.5) 119.37%
+  );
+}
+
+.gradient-overlay-2 {
+  background: linear-gradient(
+    90deg,
+    rgba(51, 37, 28, 0.5) 0%,
+    rgba(58, 54, 51, 0) 100%
+  );
 }
