@@ -1,9 +1,9 @@
-:root {
+/* :root {
   --github-logo: url("../images/svg/github-logo.svg");
   --x-logo: url("../images/svg/x-logo.svg");
   --linkedin-logo: url("../images/svg/linkedin-logo.svg");
   --scholar-logo: url("../images/svg/scholar-logo.svg");
-}
+} */
 
 .hover-button {
   background-color: #e45926ec;
@@ -32,7 +32,7 @@
 }
 
 .hover-button::after {
-  background: url("../images/noise.svg");
+  /* background: url("../images/noise.svg"); */
   content: "";
   height: 100%;
   width: 100%;
