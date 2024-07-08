@@ -1,0 +1,26 @@
+supervisor: 
+  title: Prof.
+  name: Carmela Troncoso
+  website: http://carmelatroncoso.com/
+
+topic: web privacy and security
+
+subtopics:
+  - title: browsers
+    key: browsers
+    description: Investigating the security and privacy leaks due to the browser internals.
+    icon: BROWSERS
+  - title: webpages
+    key: web
+    description: Investigating the leaks associated with the webpage design and functionality. 
+    icon: WEBPAGES
+  - title: web extensions
+    key: extensions
+    description: Investigating the security and privacy leaks due to the interaction of web extensions with the visited webpages.
+    icon: EXTENSIONS
+  - title: at-risk populations
+    key: at-risk
+    description: Investigating the privacy and security risks faced by at-risk populations.
+    icon: AT_RISK
+
+    

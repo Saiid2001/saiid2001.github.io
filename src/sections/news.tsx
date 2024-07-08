@@ -2,6 +2,7 @@ import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import Constants from "../utils/constants";
 import { Heading } from "../components/heading";
+import { IndexSection } from "../components/IndexSection";
 
 export const News: React.FC = () => {
   const data = useStaticQuery(graphql`
@@ -27,24 +28,26 @@ export const News: React.FC = () => {
   const news = data.allMarkdownRemark.edges.map((edge: any) => edge.node);
 
   return (
-    <div className="flex flex-col items-left pl-32 my-10 w-full pr-8">
-      <Heading name="/news" />
+    <IndexSection title="/news">
       <div className=" last:border-b-0">
         {news.map((n: any) => (
-          <div key={n.id} className="py-4 border-b-2 border-b-base-content/20 flex flex-row items-start space-x-2">
+          <div
+            key={n.id}
+            className="py-4 border-b-2 border-b-base-content/20 flex flex-row items-start space-x-2"
+          >
             <Constants.ICONS.TROPHY className="mt-1 w-10 h-10 text-secondary" />
             <span>
-            <p
-              className="text-base-content"
-              dangerouslySetInnerHTML={{ __html: n.html }}
-            />
-            <small className="text-secondary text-sm">
-              {n.frontmatter.fromNow} | {n.frontmatter.date}
-            </small>
+              <p
+                className="text-base-content"
+                dangerouslySetInnerHTML={{ __html: n.html }}
+              />
+              <small className="text-secondary text-sm">
+                {n.frontmatter.fromNow} | {n.frontmatter.date}
+              </small>
             </span>
           </div>
         ))}
       </div>
-    </div>
+    </IndexSection>
   );
 };

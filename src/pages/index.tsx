@@ -5,12 +5,14 @@ import info from "../data/info.json";
 import { graphql } from "gatsby";
 import { Banner } from "../sections/banner";
 import { News } from "../sections/news";
+import { Research } from "../sections/research";
 
 const IndexPage: React.FC<PageProps> = (props) => {
   return (
     <Layout {...props}>
       <Banner />
       <News />
+      <Research />
     </Layout>
   );
 };

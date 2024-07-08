@@ -63,6 +63,15 @@ const config: GatsbyConfig = {
       },
     },
     `gatsby-transformer-remark`,
+    `gatsby-transformer-yaml`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `publications`,
+        path: `${__dirname}/src/data/_publications/`,
+      },
+    },
+    'gatsby-transformer-bibtex',
   ],
 };
 

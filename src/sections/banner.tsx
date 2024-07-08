@@ -1,9 +1,8 @@
 import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
-import GithubLogo from "../images/svg/github-logo.svg";
-import LinkedInLogo from "../images/svg/linkedin-logo.svg";
-import XLogo from "../images/svg/x-logo.svg";
-import ScholarLogo from "../images/svg/scholar-logo.svg";
+
+import { graphql, useStaticQuery } from "gatsby";
+import Constants from "../utils/constants";
 
 type SocialButtonProps = {
   className: string;
@@ -12,23 +11,45 @@ type SocialButtonProps = {
 const SocialButtons: React.FC<SocialButtonProps> = ({ className }) => {
   return (
     <div className={className}>
-      <a href="#" className="btn  btn-secondary btn-square">
-        <LinkedInLogo className="h-10 w-10 p-1 rounded opacity-50" />
+      <a
+        href="https://www.linkedin.com/in/saiid-hc/"
+        className="btn  btn-secondary btn-square"
+      >
+        <Constants.ICONS.LINKEDIN className="h-10 w-10 p-1 rounded opacity-50" />
       </a>
-      <a href="#" className="btn btn-secondary  btn-square">
-        <GithubLogo className="h-10 w-10 p-2 rounded opacity-50" />
+      <a
+        href="https://github.com/Saiid2001"
+        className="btn btn-secondary  btn-square"
+      >
+        <Constants.ICONS.GITHUB className="h-10 w-10 p-2 rounded opacity-50" />
       </a>
-      <a href="#" className="btn btn-secondary btn-square">
-        <ScholarLogo className="h-10 w-10 p-1 rounded opacity-50" />
+      <a
+        href="https://scholar.google.com/citations?user=gF0rvJAAAAAJ&hl=en"
+        className="btn btn-secondary btn-square"
+      >
+        <Constants.ICONS.SCHOLAR className="h-10 w-10 p-1 rounded opacity-50" />
       </a>
-      <a href="#" className="btn  btn-secondary btn-square">
-        <XLogo className="h-10 w-10 p-2 rounded opacity-50" />
+      <a
+        href="https://x.com/saiid_hc"
+        className="btn  btn-secondary btn-square"
+      >
+        <Constants.ICONS.X className="h-10 w-10 p-2 rounded opacity-50" />
       </a>
     </div>
   );
 };
 
 export const Banner: React.FC = () => {
+  const data = useStaticQuery(graphql`
+    query BannerQuery {
+      markdownRemark(fileAbsolutePath: { regex: "/summary.md/" }) {
+        html
+      }
+    }
+  `);
+
+  const summary = data.markdownRemark.html;
+
   return (
     <section className="relative w-full ">
       <div className="gradient-overlay-2 absolute left-0 top-0 h-full w-80 z-0" />
@@ -40,21 +61,12 @@ export const Banner: React.FC = () => {
 
           <div className="relative">
             <SocialButtons className="flex flex-col items-center space-y-2 absolute -left-16" />
-            <p className="mb-5">
-              I am a PhD candidate at SPRING Lab in EPFL, Switzerland. I focus
-              on web privacy and security research. I am interested in finding
-              more robust tools to study the opaque web ecosystem! Can we
-              automate security and privacy analysis further?Clean code
-              proponent and full-stack development enthusiast. Artistically
-              inspired across mediums.
-            </p>
-            <p>
-              Clean code proponent and full-stack development enthusiast.
-              Artistically inspired across mediums.
-            </p>
-
+            <div
+              className="space-y-4"
+              dangerouslySetInnerHTML={{ __html: summary }}
+            />
             <a
-              className="btn btn-secondary btn-outline my-10"
+              className="btn btn-secondary btn-outline my-10 w-full"
               href="mailto:saiid.elhajjchehade@epfl.ch"
             >
               EMAIL saiid.elhajjchehade@epfl.ch

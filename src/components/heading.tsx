@@ -2,7 +2,9 @@ import React from "react";
 
 type HeadingProps = {
   name: string;
+  className?: string;
 };
+
 
 export const Heading: React.FC<HeadingProps> = ({ name }) => {
   return (
@@ -13,4 +15,8 @@ export const Heading: React.FC<HeadingProps> = ({ name }) => {
       </h1>
     </span>
   );
+};
+
+export const TopicHeading: React.FC<HeadingProps> = ({ name, className }) => {
+  return <h2 className={"text-secondary font-mono "+className}>{name}</h2>;
 };
