@@ -10,10 +10,12 @@ require("prismjs/plugins/line-numbers/prism-line-numbers.css");
 require("../../styles/blog.css");
 
 const ShareButtons: React.FC<{ url: string }> = ({ url }) => {
+  const urlEncoded = encodeURIComponent(url);
+
   return (
     <div className="flex flex-row justify-left gap-4 mt-4 max-lg:flex-col">
       <a
-        href={`https://twitter.com/intent/tweet?url=${url}`}
+        href={`https://twitter.com/intent/tweet?url=${urlEncoded}`}
         target="_blank"
         rel="noreferrer"
       >
@@ -29,7 +31,7 @@ const ShareButtons: React.FC<{ url: string }> = ({ url }) => {
         </button>
       </a>
       <a
-        href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}`}
+        href={`https://www.linkedin.com/sharing/share-offsite/?url=${urlEncoded}`}
         target="_blank"
         rel="noreferrer"
       >
@@ -41,9 +43,11 @@ const ShareButtons: React.FC<{ url: string }> = ({ url }) => {
   );
 };
 
-const FeedbackSection: React.FC<{ url: string }> = ({ url }) => {
+const FeedbackSection: React.FC<{ slug: string }> = ({ slug }) => {
   // feedback box and send by email to me
   const [feedback, setFeedback] = React.useState("");
+
+  const url = "https://" + Constants.DOMAIN + "/blog/" + slug;
 
   const emailURL = () => {
     const _feedback =
@@ -54,8 +58,9 @@ const FeedbackSection: React.FC<{ url: string }> = ({ url }) => {
 
     // encode
     const encodedFeedback = encodeURIComponent(_feedback);
+    const subjectEncoded = encodeURIComponent(`Feedback on ${url}`);
 
-    return `mailto:${Constants.EMAIL}?subject=Feedback on ${url}&body=${encodedFeedback}`;
+    return `mailto:${Constants.EMAIL}?subject=${subjectEncoded}&body=${encodedFeedback}`;
   };
 
   return (
@@ -94,6 +99,7 @@ interface BlogPostTemplateProps extends PageProps {
         date: string;
         tags: string[];
         summary: string;
+        slug: string;
         cover: {
           childImageSharp: {
             gatsbyImageData: any;
@@ -106,7 +112,6 @@ interface BlogPostTemplateProps extends PageProps {
 }
 
 export const BlogPostTemplate: React.FC<BlogPostTemplateProps> = (props) => {
-
   const { data } = props;
   const { markdownRemark } = data; // data.markdownRemark holds your post data
   const frontmatter = markdownRemark?.frontmatter;
@@ -114,16 +119,12 @@ export const BlogPostTemplate: React.FC<BlogPostTemplateProps> = (props) => {
   const timeToRead = markdownRemark?.timeToRead;
 
   if (!frontmatter) {
-
-    if (typeof window !== "undefined")
-      navigate("/404");
+    if (typeof window !== "undefined") navigate("/404");
     return null;
   }
 
-
   // get the image from data
   const cover = frontmatter.cover.childImageSharp.gatsbyImageData;
-
 
   return (
     <Layout {...props} noMargin>
@@ -141,7 +142,7 @@ export const BlogPostTemplate: React.FC<BlogPostTemplateProps> = (props) => {
             />
           </div>
 
-          <div className="pt-24 pb-20 w-5/12 max-w-[600px] max-md:w-full max-md:p-8 max-md:pt-28 max-md:max-w-none z-40">
+          <div className="pt-24 pb-20 w-5/12 max-w-[600px] max-md:w-full max-md:p-8 max-md:pt-28 max-md:max-w-none z-20">
             <NavigationLink to="/blog">all blogs</NavigationLink>
             <h1 className="font-mono text-5xl mt-8 mb-4 ">
               {frontmatter.title}
@@ -166,7 +167,7 @@ export const BlogPostTemplate: React.FC<BlogPostTemplateProps> = (props) => {
           className="mt-20 mb-20 blog max-w-[800px] mx-auto max-md:px-8"
           dangerouslySetInnerHTML={{ __html: html }}
         />
-        <FeedbackSection url={props.location.href} />
+        <FeedbackSection slug={frontmatter.slug} />
       </div>
     </Layout>
   );

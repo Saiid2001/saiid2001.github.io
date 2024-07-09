@@ -17,13 +17,13 @@ interface BlogProps {
 const Blog: React.FC<BlogProps> = (props) => {
   return (
     <div
-      className="flex flex-row gap-4 cursor-pointer p-4 py-14 border-b-2 border-base-content/20 hover:bg-secondary/5 transition-colors rounded"
+      className="flex flex-row gap-4 cursor-pointer p-4 py-14 border-b-2 border-base-content/20 hover:bg-secondary/5 transition-colors rounded max-md:py-4"
       key={props.slug}
       onClick={() =>
         window ? (window.location.href = "/blog/" + props.slug) : null
       }
     >
-      <div className="w-40">
+      <div className="w-40 max-md:hidden">
         <GatsbyImage
           image={props.cover.childImageSharp.gatsbyImageData}
           alt={props.title}
@@ -75,7 +75,7 @@ export const BlogsPage: React.FC<BlogsPageProps> = (props) => {
 
   return (
     <Layout {...props}>
-      <div className="flex flex-col items-left px-8 justify-center w-full h-full mt-32">
+      <div className="flex flex-col items-left px-8 justify-center w-full h-full mt-32 max-md:px-4">
         <Heading name="Blogs"></Heading>
         <section className="flex flex-col gap-y-4 mt-10">
           {blogs.map(({ node }) => (

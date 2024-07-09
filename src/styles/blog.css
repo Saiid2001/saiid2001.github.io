@@ -41,6 +41,10 @@
   @apply text-lg mb-2 mt-2 indent-8;
 }
 
+.blog.no-indent p {
+  @apply text-lg mb-2 mt-2 indent-0;
+}
+
 .blog a {
   @apply text-secondary font-bold hover:underline;
 }

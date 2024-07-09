@@ -14,6 +14,7 @@ import MenuLogo from "../images/svg/menu.svg";
 
 export const SCROLL_START_THRESHOLD = 20;
 export const EMAIL = "saiid.elhajjchehade@epfl.ch";
+export const DOMAIN = "saiid2001.github.io";
 
 export const ICONS = {
   DOWN_ARROW: DownArrowIcon,
@@ -30,11 +31,11 @@ export const ICONS = {
   LINKEDIN: LinkedInLogo,
   X: XLogo,
   SCHOLAR: ScholarLogo,
-
 };
 
 export default {
   ICONS,
   SCROLL_START_THRESHOLD,
   EMAIL,
+  DOMAIN
 };

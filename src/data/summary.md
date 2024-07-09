@@ -8,3 +8,11 @@ inspired across mediums.
 
 Clean code proponent and full-stack development enthusiast.
 Artistically inspired across mediums.
+
+<br />
+
+>## Contact
+>BC 266, EPFL CH-1014
+>Lausanne, Switzerland
+>
+>+41 21 693 99 77

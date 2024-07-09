@@ -5,6 +5,8 @@ import { graphql, useStaticQuery } from "gatsby";
 import Constants from "../utils/constants";
 import { CVDownloadButton, Navigation, ThemeToggle } from "./header";
 
+require("../styles/blog.css");
+
 type SocialButtonProps = {
   className: string;
 };
@@ -87,7 +89,7 @@ export const Banner: React.FC<{
 
             <div className="relative max-md:flex max-md:flex-col max-md:gap-4">
               <div
-                className="gap-y-4"
+                className="gap-y-4 blog no-indent"
                 dangerouslySetInnerHTML={{ __html: summary }}
               />
               <SocialButtons className="flex flex-col items-center gap-2 absolute -left-16 top-0 max-md:relative max-md:flex-row max-md:left-0 max-md:my-0 max-md:justify-center" />

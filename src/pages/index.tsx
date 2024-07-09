@@ -8,6 +8,7 @@ import { News } from "../sections/news";
 import { Research } from "../sections/research";
 import { SEO } from "../components/seo";
 
+
 const IndexPage: React.FC<PageProps> = (props) => {
   const [theme, setTheme] = React.useState<string | undefined>(undefined);
 
