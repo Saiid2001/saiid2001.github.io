@@ -118,6 +118,8 @@ export const BlogPostTemplate: React.FC<BlogPostTemplateProps> = (props) => {
   const html = markdownRemark?.html;
   const timeToRead = markdownRemark?.timeToRead;
 
+  const url = Constants.DOMAIN + "/blog/" + frontmatter.slug;
+
   if (!frontmatter) {
     if (typeof window !== "undefined") navigate("/404");
     return null;
@@ -156,7 +158,7 @@ export const BlogPostTemplate: React.FC<BlogPostTemplateProps> = (props) => {
             <hr className="my-4 border-base-content/20" />
             <p className="text-lg">{frontmatter.summary}</p>
             <p className="text-lg">{timeToRead} min read</p>
-            <ShareButtons url={props.location.href} />
+            <ShareButtons url={url} />
           </div>
           <span
             className="absolute bottom-0 w-full h-2 header-gradient"
