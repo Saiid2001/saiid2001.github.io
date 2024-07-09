@@ -185,6 +185,11 @@ interface BlogHeadProps extends HeadProps {
         summary: string;
         date: string;
         tags: string[];
+        cover: {
+          childImageSharp: {
+            gatsbyImageData: any;
+          };
+        };
       };
       excerpt: string;
     };
@@ -199,6 +204,7 @@ export const Head: React.FC<BlogHeadProps> = ({
 }) => {
   const { markdownRemark } = data;
   const frontmatter = markdownRemark?.frontmatter;
+  const cover = frontmatter?.cover?.childImageSharp?.gatsbyImageData;
 
   if (!frontmatter) {
     return null;
@@ -208,6 +214,12 @@ export const Head: React.FC<BlogHeadProps> = ({
     <>
       <title>{frontmatter.title} | Saiid's Blog</title>
       <meta name="description" content={frontmatter.summary} />
+      <meta name="keywords" content={frontmatter.tags.join(", ")} />
+      <meta
+        property="og:image"
+        content={"https://" + Constants.DOMAIN + cover.images.fallback.src}
+      />
+
       <meta property="og:title" content={frontmatter.title} />
       <meta property="og:description" content={frontmatter.summary} />
       <meta property="og:url" content={location.pathname} />
@@ -215,6 +227,7 @@ export const Head: React.FC<BlogHeadProps> = ({
       <meta property="article:published_time" content={frontmatter.date} />
       <meta property="article:author" content="Saiid El Hajj Chehade" />
       <meta property="article:section" content="Technology" />
+
       <meta property="article:tag" content="Technology" />
       <meta property="article:tag" content="Software Engineering" />
       <meta property="article:tag" content="Web Development" />
@@ -232,6 +245,13 @@ export const Head: React.FC<BlogHeadProps> = ({
       <meta name="twitter:label2" content="Filed under" />
       <meta name="twitter:data2" content={frontmatter.tags.join(", ")} />
       <meta name="twitter:site" content="@saiid_hc" />
+      <meta
+        name="twitter:image"
+        content={"https://" + Constants.DOMAIN + cover.images.fallback.src}
+      />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image:alt" content={frontmatter.title} />
     </>
   );
 };
