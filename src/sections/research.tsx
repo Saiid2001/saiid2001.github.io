@@ -4,6 +4,7 @@ import * as React from "react";
 import { TopicHeading } from "../components/heading";
 import Constants from "../utils/constants";
 import { StaticImage } from "gatsby-plugin-image";
+import { NavigationLink } from "../components/navigation";
 
 const Subtopic: React.FC<{
   title: string;
@@ -13,7 +14,7 @@ const Subtopic: React.FC<{
   const Icon = Constants.ICONS[icon as keyof typeof Constants.ICONS];
 
   return (
-    <div className="flex flex-row items-center space-x-4 text-secondary bg-secondary/10 border-4 border-secondary rounded cursor-pointer">
+    <div className="flex flex-row items-center gap-x-4 text-secondary bg-secondary/10 border-4 border-secondary rounded cursor-pointer">
       <div className="h-20 w-20  bg-secondary flex items-center justify-center">
         <Icon className="h-10 w-10 " />
       </div>
@@ -35,9 +36,9 @@ const Project: React.FC<{
 }> = ({ title, description, year, url, code_url, subtopics, finished }) => {
   const _subtopics = subtopics.split(",");
   return (
-    <div className="flex flex-row items-center justify-between space-x-4 bg-secondary/10 border-4 border-secondary rounded cursor-default p-4">
+    <div className="flex flex-row items-center justify-between gap-x-4 bg-secondary/10 border-4 border-secondary rounded cursor-default p-4">
       <div>
-        <div className="flex flex-row items-center space-x-1">
+        <div className="flex flex-row items-center gap-x-1">
           <h3 className="text-xl uppercase font-normal text-secondary">
             {title}
           </h3>
@@ -62,7 +63,7 @@ const Project: React.FC<{
           </span>
         ))}
       </div>
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col gap-y-4">
         <a href={url}>
           <Constants.ICONS.SCHOLAR
             className="h-10 w-10"
@@ -140,7 +141,7 @@ export const Research: React.FC = () => {
           I am mainly interested in investigating the realm of {topic} and I
           regularly poke the following components
         </p>
-        <div className="grid grid-cols-4 space-x-4 my-8">
+        <div className="grid grid-cols-4 gap-4 my-8 max-lg:grid-cols-2 max-md:grid-cols-1">
           {subtopics.map((subtopic: any, index: number) => (
             <Subtopic key={index} {...subtopic} />
           ))}
@@ -149,23 +150,11 @@ export const Research: React.FC = () => {
         <TopicHeading name={"/research/projects"} className="mt-12" />
         <p>Here is a highlight of my most interesting projects</p>
 
-        <div className="grid grid-cols-4 space-x-4 my-8">
+        <div className="grid grid-cols-4 gap-4 my-8 max-lg:grid-cols-2 max-md:grid-cols-1">
           {projects.map((node: any, index: number) => (
             <Project key={index} {...node} />
           ))}
-          <a
-            href="/publications"
-            className="text-secondary font-mono hover:underline"
-          >
-            <Constants.ICONS.DOWN_ARROW
-              className="h-3 w-3 -rotate-90 inline"
-              style={{
-                filter:
-                  "invert(47%) sepia(78%) saturate(2576%) hue-rotate(344deg) brightness(90%) contrast(97%)",
-              }}
-            />{" "}
-            view all publications
-          </a>
+          <NavigationLink to="/projects">view all publications</NavigationLink>
         </div>
       </div>
     </IndexSection>

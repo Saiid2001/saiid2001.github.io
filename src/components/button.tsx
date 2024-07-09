@@ -65,16 +65,29 @@ export const TextButton: React.FC<React.PropsWithChildren<ButtonProps>> = (
 };
 
 export const IconAndTextButton: React.FC<
-  React.PropsWithChildren<ButtonProps & { icon: any }>
+  React.PropsWithChildren<ButtonProps & { icon: any; accent?: boolean }>
 > = (props) => {
   return (
-    <button className="group text-secondary font-bold font-mono bg-secondary/5 btn btn-outline btn-sm p-0 pr-2" onClick={props.onClick}>
-      <span className="w-7 h-full bg-secondary group-hover:bg-secondary-light flex items-center justify-center">
-      <props.icon className="w-full -translate-x-[1px]"/>
+    <button
+      className={
+        "group font-bold font-mono btn btn-outline btn-sm p-0 pr-2 pointer-events-auto " +
+        (props.accent
+          ? "text-secondary-light hover:bg-base-100 hover:text-base-content"
+          : "bg-secondary/5 text-secondary ")
+      }
+      onClick={props.onClick}
+    >
+      <span
+        className={
+          "w-7 h-full  flex items-center justify-center " +
+          (props.accent
+            ? "bg-secondary-light group-hover:bg-secondary"
+            : "bg-secondary group-hover:bg-secondary-light")
+        }
+      >
+        <props.icon className="w-full -translate-x-[1px]" />
       </span>
-      <span>
-      {props.children}
-      </span>
+      <span>{props.children}</span>
     </button>
   );
 };

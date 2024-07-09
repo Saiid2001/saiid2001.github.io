@@ -12,7 +12,7 @@ export const IndexSection: React.FC<
   return (
     <div
       className={
-        "flex flex-col items-left pl-32 my-10 w-full pr-8 " + props.className
+        "flex flex-col items-left pl-32 my-10 w-full pr-8 max-lg:pl-8 " + props.className
       }
     >
       <Heading name={props.title} />

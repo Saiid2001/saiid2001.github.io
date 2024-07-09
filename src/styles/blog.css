@@ -1,0 +1,139 @@
+/**
+ * If you already use line highlighting
+ */
+
+/* Adjust the position of the line numbers */
+.gatsby-highlight pre[class*="language-"].line-numbers {
+  padding-left: 2.8em;
+}
+
+/**
+   * If you only want to use line numbering
+   */
+
+.gatsby-highlight {
+  background-color: #fdf6e3;
+  border-radius: 0.3em;
+  margin: 0.5em 0;
+  padding: 1em;
+  overflow: auto;
+}
+
+.gatsby-highlight pre[class*="language-"].line-numbers {
+  padding: 0;
+  padding-left: 2.8em;
+  overflow: initial;
+}
+
+.blog h1 {
+  @apply text-3xl font-mono font-bold text-base-content bg-gradient-to-r from-secondary/10 relative -left-10 pl-10 to-transparent mb-4 mt-12;
+}
+
+.blog h2 {
+  @apply text-2xl font-mono font-bold text-secondary;
+}
+
+.blog h3 {
+  @apply text-xl font-mono text-secondary;
+}
+
+.blog p {
+  @apply text-lg mb-2 mt-2 indent-8;
+}
+
+.blog a {
+  @apply text-secondary font-bold hover:underline;
+}
+
+.blog ul {
+  @apply list-disc list-inside pl-8;
+
+  /* make list disc orange */
+  list-style: disc;
+  list-style-position: inside;
+  list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="%23f27b50"><circle cx="10" cy="10" r="10"/></svg>');
+}
+
+.blog ul > li {
+  @apply mb-2;
+}
+
+.blog ol {
+  @apply list-decimal list-inside pl-12;
+
+  /* make list decimal orange */
+  list-style: decimal;
+}
+
+.blog ol > li {
+  @apply mb-2;
+}
+
+.blog blockquote {
+  @apply bg-secondary/10 pl-4 py-4 text-base-content italic;
+}
+
+.blog blockquote p {
+  @apply mb-2;
+}
+
+.blog blockquote p:last-child {
+  @apply mb-0;
+}
+
+.blog blockquote p:first-child {
+  @apply mt-0;
+}
+
+.blog blockquote p + p {
+  @apply mt-2;
+}
+
+.blog img {
+  @apply w-full h-auto max-h-96 object-contain my-4;
+}
+
+.blog table {
+  @apply table;
+}
+
+.blog table th {
+  @apply bg-secondary/10;
+}
+
+.blog table th,
+.blog table td {
+  @apply border border-secondary/10;
+}
+
+.blog embed,
+.blog iframe {
+  @apply w-full h-auto aspect-video my-4;
+}
+
+.header-gradient {
+  /* Rectangle 89 */
+  background: linear-gradient(
+    90deg,
+    #23221d 0%,
+    #282416 12.5%,
+    #1e1c19 28.5%,
+    #201e1b 47.5%,
+    #2d1c0d 74.5%,
+    #21201c 100%
+  );
+}
+
+[data-theme="light"] .header-gradient {
+  /* Rectangle 89 */
+
+  background: linear-gradient(
+    90deg,
+    #e7ddbf 0%,
+    #fffaec 12.5%,
+    #e6dec5 28.5%,
+    #ebe1c1 47.5%,
+    #ffcd9f 74.5%,
+    #efe4c5 100%
+  );
+}

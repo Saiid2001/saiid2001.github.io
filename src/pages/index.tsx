@@ -6,11 +6,19 @@ import { graphql } from "gatsby";
 import { Banner } from "../sections/banner";
 import { News } from "../sections/news";
 import { Research } from "../sections/research";
+import { SEO } from "../components/seo";
 
 const IndexPage: React.FC<PageProps> = (props) => {
+  const [theme, setTheme] = React.useState<string | undefined>(undefined);
+
   return (
-    <Layout {...props}>
-      <Banner />
+    <Layout
+      {...props}
+      hideHeaderOnScroll
+      theme={theme}
+      onToggleTheme={setTheme}
+    >
+      <Banner theme={theme} onToggleTheme={setTheme} />
       <News />
       <Research />
     </Layout>
@@ -19,18 +27,4 @@ const IndexPage: React.FC<PageProps> = (props) => {
 
 export default IndexPage;
 
-export const Head: HeadFC = () => <title>Saiid El Hajj Chehade</title>;
-
-export const query = graphql`
-  query {
-    file(relativePath: { eq: "profile-picture.png" }) {
-      childImageSharp {
-        # Specify the image processing specifications right in the query.
-        # Makes it trivial to update as your page's design changes.
-        fixed(height: 300) {
-          ...GatsbyImageSharpFixed
-        }
-      }
-    }
-  }
-`;
+export const Head: HeadFC = () => <SEO></SEO>;

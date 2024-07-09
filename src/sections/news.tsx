@@ -33,7 +33,7 @@ export const News: React.FC = () => {
         {news.map((n: any) => (
           <div
             key={n.id}
-            className="py-4 border-b-2 border-b-base-content/20 flex flex-row items-start space-x-2"
+            className="py-4 border-b-2 border-b-base-content/20 flex flex-row items-start gap-x-2"
           >
             <Constants.ICONS.TROPHY className="mt-1 w-10 h-10 text-secondary" />
             <span>
