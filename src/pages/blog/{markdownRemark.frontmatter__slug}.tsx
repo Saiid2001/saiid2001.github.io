@@ -118,7 +118,7 @@ export const BlogPostTemplate: React.FC<BlogPostTemplateProps> = (props) => {
   const html = markdownRemark?.html;
   const timeToRead = markdownRemark?.timeToRead;
 
-  const url = Constants.DOMAIN + "/blog/" + frontmatter.slug;
+  const url = Constants.DOMAIN + "/blog/" + frontmatter?.slug;
 
   if (!frontmatter) {
     if (typeof window !== "undefined") navigate("/404");
