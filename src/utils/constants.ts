@@ -14,7 +14,7 @@ import MenuLogo from "../images/svg/menu.svg";
 
 export const SCROLL_START_THRESHOLD = 20;
 export const EMAIL = "saiid.elhajjchehade@epfl.ch";
-export const DOMAIN = "saiid2001.github.io";
+export const DOMAIN = "saiid.ch";
 
 export const ICONS = {
   DOWN_ARROW: DownArrowIcon,
