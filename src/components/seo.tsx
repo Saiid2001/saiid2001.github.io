@@ -11,10 +11,14 @@ export const SEO: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
       <link rel="manifest" href="/manifest.json" />
       <link rel="shortcut icon" href="/favicon.ico" />
 
-      <title>saiid.ch</title>
+      <title>Saiid El Hajj Chehade's Personal Website</title>
       <meta
         name="description"
-        content="Saiid El Hajj Chehade's personal website"
+        content="Hi! I am a PhD candidate at SPRING Lab in EPFL, Switzerland 🇨🇭. I focus on web privacy and security research. I am interested in finding more robust tools to study the opaque web ecosystem!"
+      />
+      <meta
+        name="keywords"
+        content="Saiid El Hajj Chehade, Saiid Chehade, Saiid, Chehade, SPRING Lab, EPFL, Web Privacy, Web Security, Security, Privcay, Web Research, Web Ecosystem, Research, Computer"
       />
       <meta property="og:title" content="saiid.ch" />
       <meta
