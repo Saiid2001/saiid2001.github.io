@@ -2,8 +2,8 @@ import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `Personal Website`,
-    siteUrl: `https://www.yourdomain.tld`,
+    title: `Saiid El Hajj Chehade's Personal Website`,
+    siteUrl: `https://saiid.ch`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -71,7 +71,7 @@ const config: GatsbyConfig = {
         path: `${__dirname}/src/data/_publications/`,
       },
     },
-    'gatsby-transformer-bibtex',
+    "gatsby-transformer-bibtex",
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -80,8 +80,8 @@ const config: GatsbyConfig = {
             resolve: `gatsby-remark-katex`,
             options: {
               // Add any KaTeX options from https://github.com/KaTeX/KaTeX/blob/master/docs/options.md here
-              strict: `ignore`
-            }
+              strict: `ignore`,
+            },
           },
           {
             resolve: `gatsby-remark-prismjs`,
@@ -151,6 +151,20 @@ const config: GatsbyConfig = {
         ],
       },
     },
+    {
+      resolve: `gatsby-plugin-robots-txt`,
+      options: {
+        host: "https://saiid.ch",
+        sitemap: "https://saiid.ch/sitemap-0.xml",
+        policy: [{ userAgent: "*", allow: "/" }],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        excludes: [`/404`, `/404.html`, `/blog/null/`],
+      },
+    }
   ],
 };
 
