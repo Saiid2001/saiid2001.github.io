@@ -105,6 +105,7 @@ export const Banner: React.FC<{
             <StaticImage
               src="../images/profile.png"
               alt="Profile picture"
+              sizes="(min-width: 768px) 50vw, 100vw"
               className="min-h-72 h-full max-md:h-52 max-md:min-h-0 max-md:w-52 max-md:rounded-full"
             />
             <div className="gradient-overlay absolute w-full h-full top-0 left-0 max-md:hidden"></div>
@@ -121,6 +122,7 @@ export const Banner: React.FC<{
               src="../images/profile.png"
               alt="Profile picture"
               className="h-28 w-28"
+              sizes="(min-width: 768px) 50vw, 100vw"
             />
             <div className="pt-4 pl-4 pr-8 w-full grow flex flex-col">
               <div className="flex flex-row w-full items-center gap-x-2">

@@ -28,6 +28,7 @@ const Blog: React.FC<BlogProps> = (props) => {
           image={props.cover.childImageSharp.gatsbyImageData}
           alt={props.title}
           className=" h-40 w-40  rounded-full aspect-square grow"
+          sizes="40"
         />
       </div>
       <div className="flex flex-col gap-y-2 grow-0">

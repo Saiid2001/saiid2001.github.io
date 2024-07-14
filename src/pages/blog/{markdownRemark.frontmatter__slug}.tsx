@@ -141,6 +141,7 @@ export const BlogPostTemplate: React.FC<BlogPostTemplateProps> = (props) => {
                 maskImage:
                   "linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0))",
               }}
+              sizes="100vw"
             />
           </div>
 

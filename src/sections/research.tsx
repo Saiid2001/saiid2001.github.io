@@ -51,6 +51,7 @@ const Project: React.FC<{
                 filter:
                   "invert(47%) sepia(78%) saturate(2576%) hue-rotate(344deg) brightness(90%) contrast(97%)",
               }}
+              sizes="5"
             />
           )}
         </div>
