@@ -81,7 +81,7 @@ export const Navigation: React.FC<{ scrolled: boolean; vertical?: boolean }> = (
       }
     >
       <a
-        href="/publications"
+        href="/publications/"
         className={
           "text-base-content font-light hover:underline " +
           (scrolled ? "hover:text-base-100" : "hover:text-secondary")
@@ -90,7 +90,7 @@ export const Navigation: React.FC<{ scrolled: boolean; vertical?: boolean }> = (
         publications
       </a>
       <a
-        href="/projects"
+        href="/projects/"
         className={
           "text-base-content font-light hover:underline " +
           (scrolled ? "hover:text-base-100" : "hover:text-secondary")
@@ -99,7 +99,7 @@ export const Navigation: React.FC<{ scrolled: boolean; vertical?: boolean }> = (
         projects
       </a>
       <a
-        href="/blog"
+        href="/blog/"
         className={
           "text-base-content font-light hover:underline " +
           (scrolled ? "hover:text-base-100" : "hover:text-secondary")

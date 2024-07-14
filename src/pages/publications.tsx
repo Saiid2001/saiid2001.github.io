@@ -95,7 +95,7 @@ export const Head: HeadFC = () => (
     <meta property="og:title" content="Publications" />
     <meta property="og:description" content="Publications" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://saiid.ch/publications" />
+    <meta property="og:url" content="https://saiid.ch/publications/" />
   </SEO>
 );
 
