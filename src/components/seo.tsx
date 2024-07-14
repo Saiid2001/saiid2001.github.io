@@ -6,10 +6,21 @@ export const SEO: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
       {children}
 
       <meta charSet="utf-8" />
+      <meta lang="en" />
+      <meta name="author" content="Saiid El Hajj Chehade" />
+      <meta name="robots" content="index, follow" />
+      <meta name="google" content="notranslate" />
+      <meta name="googlebot" content="index, follow" />
+      <meta name="bingbot" content="index, follow" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+      <meta name="apple-mobile-web-app-title" content="saiid.ch" />
+      <meta name="application-name" content="saiid.ch" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="theme-color" content="#000000" />
       <link rel="manifest" href="/manifest.json" />
       <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="canonical" href="https://saiid.ch" />
 
       <title>Saiid El Hajj Chehade's Personal Website</title>
       <meta
