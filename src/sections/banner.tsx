@@ -87,6 +87,27 @@ export const Banner: React.FC<{
               SAIID EL HAJJ CHEHADE
             </h1>
 
+            {/* Schema Microdata */}
+            <div
+              itemScope
+              itemType="http://schema.org/Person"
+              className="hidden"
+            >
+              <span itemProp="name">Saiid El Hajj Chehade</span>
+              <span itemProp="jobTitle">PhD Student</span>
+              <span itemProp="affiliation">EPFL</span>
+              <span itemProp="alumniOf">American University of Beirut</span>
+              <span itemProp="url">{Constants.DOMAIN}</span>
+              <span itemProp="email">{Constants.EMAIL}</span>
+              <span itemProp="address" itemScope itemType="http://schema.org/PostalAddress">
+                <span itemProp="postalCode">1015</span>
+                <span itemProp="streetAddress">Station 14</span>
+                <span itemProp="addressLocality">Lausanne</span>
+                <span itemProp="addressCountry">Switzerland</span>
+              </span>
+              <span itemProp="telephone">+41 21 693 99 77</span>
+            </div>
+
             <div className="relative max-md:flex max-md:flex-col max-md:gap-4">
               <div
                 className="gap-y-4 blog no-indent"

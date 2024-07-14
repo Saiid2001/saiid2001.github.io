@@ -107,6 +107,9 @@ interface BlogPostTemplateProps extends PageProps {
         };
       };
       timeToRead: number;
+      wordCount: {
+        words: number;
+      };
     };
   };
 }
@@ -115,6 +118,7 @@ export const BlogPostTemplate: React.FC<BlogPostTemplateProps> = (props) => {
   const { data } = props;
   const { markdownRemark } = data; // data.markdownRemark holds your post data
   const frontmatter = markdownRemark?.frontmatter;
+  const wordCount = markdownRemark?.wordCount?.words;
   const html = markdownRemark?.html;
   const timeToRead = markdownRemark?.timeToRead;
 
@@ -128,8 +132,43 @@ export const BlogPostTemplate: React.FC<BlogPostTemplateProps> = (props) => {
   // get the image from data
   const cover = frontmatter.cover.childImageSharp.gatsbyImageData;
 
+  const microdata = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: frontmatter.title,
+    image: "https://" + Constants.DOMAIN + cover.images.fallback.src,
+    datePublished: frontmatter.date,
+    dateModified: frontmatter.date,
+    author: {
+      "@type": "Person",
+      name: "Saiid El Hajj Chehade",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Saiid's Blog",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://" + Constants.DOMAIN + "/favicon-32x32.png",
+      },
+    },
+    description: frontmatter.summary,
+    mainEntityOfPage: url,
+    url: url,
+    articleBody: html,
+    articleSection: frontmatter.tags.join(", "),
+    keywords: frontmatter.tags.join(", "),
+    wordCount: wordCount,
+    timeRequired: timeToRead + "M",
+    isAccessibleForFree: true,
+    hasPart: {
+      "@type": "WebPageElement",
+      isAccessibleForFree: true,
+    },
+  };
+
   return (
     <Layout {...props} noMargin>
+      <script type="application/ld+json">{JSON.stringify(microdata)}</script>
       <div className=" mb-10 ">
         <header className="relative w-screen header-gradient gap-10 flex flex-row justify-left pr-24">
           <div className="grow">
@@ -275,6 +314,9 @@ export const pageQuery = graphql`
       }
       timeToRead
       excerpt
+      wordCount {
+        words
+      }
     }
   }
 `;
