@@ -14,7 +14,7 @@ export const SEO: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
       <title>Saiid El Hajj Chehade's Personal Website</title>
       <meta
         name="description"
-        content="Hi! I am a PhD candidate at SPRING Lab in EPFL, Switzerland 🇨🇭. I focus on web privacy and security research. I am interested in finding more robust tools to study the opaque web ecosystem!"
+        content="Hi! I am a PhD candidate at SPRING Lab in EPFL, Switzerland 🇨🇭. I focus on web privacy and security research. Check my website to know more!"
       />
       <meta
         name="keywords"
