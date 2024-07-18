@@ -49,6 +49,7 @@ export const SEO: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
       />
       <meta name="twitter:url" content="https://saiid.ch" />
       <meta name="twitter:site" content="@saiid_hc" />
+      <html lang="en" />
     </>
   );
 };
