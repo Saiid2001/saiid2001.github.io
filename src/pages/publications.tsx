@@ -3,9 +3,11 @@ import * as React from "react";
 import Layout from "../sections/layout";
 import { Heading } from "../components/heading";
 import { SEO } from "../components/seo";
+require("../styles/publications.css");
 
 interface PublicationProps {
   key: string;
+  paper_key: string;
   title: string;
   year: string;
   raw: string;
@@ -18,13 +20,34 @@ interface PublicationProps {
   paper_file: string;
 }
 
+
 const Publication: React.FC<PublicationProps> = (props) => {
   function copy() {
     navigator.clipboard.writeText(props.raw);
   }
 
+  // if the url has #paper_key, scroll to the paper
+  React.useEffect(() => {
+    if (window.location.hash === "#" + props.paper_key) {
+      const elem = document.getElementById(props.paper_key);
+      console.log(elem);
+      if (elem) {
+
+
+        setTimeout(() => {
+        elem.scrollIntoView({ behavior: "smooth" });
+        elem.classList.add("paper-highlight");
+        }, 500);
+
+      }
+    }
+  }, []);
+
   return (
-    <div className="flex flex-col gap-y-2">
+    <div id={props.paper_key} className="flex flex-col gap-y-2 relative group pl-8">
+      <a href={"#" + props.paper_key} className="text-lg font-semibold absolute left-4 hidden group-hover:block">
+        #
+      </a>
       <h1 className="text-2xl font-bold">{props.title}</h1>
       <p className="text-lg">{props.author}</p>
       <p className="text-lg italic">{props.booktitle}</p>
@@ -85,8 +108,10 @@ const PublicationsPage: React.FC<PublicationsPageProps> = (props) => {
       (file) => file.name === node.key
     );
 
+
     return {
       ...node,
+      paper_key: node.key,
       paper_file: paper_file ? paper_file.publicURL : "",
     };
   }
