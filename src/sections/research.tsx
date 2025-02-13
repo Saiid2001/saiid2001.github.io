@@ -65,7 +65,7 @@ const Project: React.FC<{
         ))}
       </div>
       <div className="flex flex-col gap-y-4">
-        <a href={url}>
+        {!!url && <a href={url}>
           <Constants.ICONS.SCHOLAR
             className="h-10 w-10"
             style={{
@@ -73,16 +73,18 @@ const Project: React.FC<{
                 "invert(47%) sepia(78%) saturate(2576%) hue-rotate(344deg) brightness(90%) contrast(97%)",
             }}
           />
-        </a>
-        <a href={code_url}>
-          <Constants.ICONS.GITHUB
-            className="h-10 w-10"
-            style={{
-              filter:
-                "invert(47%) sepia(78%) saturate(2576%) hue-rotate(344deg) brightness(90%) contrast(97%)",
-            }}
-          />
-        </a>
+        </a>}
+
+        {!!code_url &&
+          <a href={code_url}>
+            <Constants.ICONS.GITHUB
+              className="h-10 w-10"
+              style={{
+                filter:
+                  "invert(47%) sepia(78%) saturate(2576%) hue-rotate(344deg) brightness(90%) contrast(97%)",
+              }}
+            />
+          </a>}
       </div>
     </div>
   );

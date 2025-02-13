@@ -10,17 +10,21 @@ subtopics:
     key: browsers
     description: Investigating the security and privacy leaks due to the browser internals.
     icon: BROWSERS
-  - title: webpages
-    key: web
-    description: Investigating the leaks associated with the webpage design and functionality. 
+  # - title: webpages
+  #   key: web
+  #   description: Investigating the leaks associated with the webpage design and functionality. 
+  #   icon: WEBPAGES
+  - title: server-side
+    key: server
+    description: Investigating the security and privacy leaks due to the server-side components.
     icon: WEBPAGES
   - title: web extensions
     key: extensions
     description: Investigating the security and privacy leaks due to the interaction of web extensions with the visited webpages.
     icon: EXTENSIONS
-  - title: at-risk populations
-    key: at-risk
-    description: Investigating the privacy and security risks faced by at-risk populations.
-    icon: AT_RISK
+  # - title: at-risk populations
+  #   key: at-risk
+  #   description: Investigating the privacy and security risks faced by at-risk populations.
+  #   icon: AT_RISK
 
     

@@ -45,8 +45,6 @@ export const LogoButton: React.FC<LogoButtonProps> = (props) => {
     "--logo": "var(--" + props.logo + "-logo)",
   } as React.CSSProperties;
 
-  console.log(buttonStyle);
-
   return (
     <button className="hover-button" style={buttonStyle} ref={elemRef}>
       <span></span>
