@@ -15,6 +15,7 @@ interface BlogProps {
 }
 
 const Blog: React.FC<BlogProps> = (props) => {
+
   return (
     <div
       className="flex flex-row gap-4 cursor-pointer p-4 py-14 border-b-2 border-base-content/20 hover:bg-secondary/5 transition-colors rounded max-md:py-4"

@@ -90,27 +90,32 @@ const FeedbackSection: React.FC<{ slug: string }> = ({ slug }) => {
   );
 };
 
+type FrontMatterType = {
+  title: string;
+  date: string;
+  tags: string[];
+  summary: string;
+  slug: string;
+  cover: {
+    childImageSharp: {
+      gatsbyImageData: any;
+    };
+  };
+};
+
+type MarkdownRemarkType = {
+  html: string;
+  frontmatter: FrontMatterType;
+  timeToRead: number;
+  wordCount: {
+    words: number;
+  };
+};
+
+
 interface BlogPostTemplateProps extends PageProps {
   data: {
-    markdownRemark: {
-      html: string;
-      frontmatter: {
-        title: string;
-        date: string;
-        tags: string[];
-        summary: string;
-        slug: string;
-        cover: {
-          childImageSharp: {
-            gatsbyImageData: any;
-          };
-        };
-      };
-      timeToRead: number;
-      wordCount: {
-        words: number;
-      };
-    };
+    markdownRemark: MarkdownRemarkType;
   };
 }
 
@@ -118,7 +123,6 @@ export const BlogPostTemplate: React.FC<BlogPostTemplateProps> = (props) => {
   const { data } = props;
   const { markdownRemark } = data; // data.markdownRemark holds your post data
   const frontmatter = markdownRemark?.frontmatter;
-  const wordCount = markdownRemark?.wordCount?.words;
   const html = markdownRemark?.html;
   const timeToRead = markdownRemark?.timeToRead;
 
@@ -132,43 +136,9 @@ export const BlogPostTemplate: React.FC<BlogPostTemplateProps> = (props) => {
   // get the image from data
   const cover = frontmatter.cover.childImageSharp.gatsbyImageData;
 
-  const microdata = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: frontmatter.title,
-    image: "https://" + Constants.DOMAIN + cover.images.fallback.src,
-    datePublished: frontmatter.date,
-    dateModified: frontmatter.date,
-    author: {
-      "@type": "Person",
-      name: "Saiid El Hajj Chehade",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Saiid's Blog",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://" + Constants.DOMAIN + "/favicon-32x32.png",
-      },
-    },
-    description: frontmatter.summary,
-    mainEntityOfPage: url,
-    url: url,
-    articleBody: html,
-    articleSection: frontmatter.tags.join(", "),
-    keywords: frontmatter.tags.join(", "),
-    wordCount: wordCount,
-    timeRequired: timeToRead + "M",
-    isAccessibleForFree: true,
-    hasPart: {
-      "@type": "WebPageElement",
-      isAccessibleForFree: true,
-    },
-  };
 
   return (
     <Layout {...props} noMargin>
-      <script type="application/ld+json">{JSON.stringify(microdata)}</script>
       <div className=" mb-10 ">
         <header className="relative w-screen header-gradient gap-10 flex flex-row justify-left pr-24">
           <div className="grow">
@@ -219,20 +189,7 @@ export default BlogPostTemplate;
 
 interface BlogHeadProps extends HeadProps {
   data: {
-    markdownRemark: {
-      frontmatter: {
-        title: string;
-        summary: string;
-        date: string;
-        tags: string[];
-        cover: {
-          childImageSharp: {
-            gatsbyImageData: any;
-          };
-        };
-      };
-      excerpt: string;
-    };
+    markdownRemark: MarkdownRemarkType;
   };
 }
 
@@ -245,13 +202,51 @@ export const Head: React.FC<BlogHeadProps> = ({
   const { markdownRemark } = data;
   const frontmatter = markdownRemark?.frontmatter;
   const cover = frontmatter?.cover?.childImageSharp?.gatsbyImageData;
+  const wordCount = markdownRemark?.wordCount?.words;
+  const timeToRead = markdownRemark?.timeToRead;
 
   if (!frontmatter) {
     return null;
   }
 
+  const url = Constants.DOMAIN + "/blog/" + frontmatter?.slug;
+
+  const microdata = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: frontmatter.title,
+    image: "https://" + Constants.DOMAIN + cover.images.fallback.src,
+    datePublished: frontmatter.date,
+    dateModified: frontmatter.date,
+    author: {
+      "@type": "Person",
+      name: "Saiid El Hajj Chehade",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Saiid's Blog",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://" + Constants.DOMAIN + "/favicon-32x32.png",
+      },
+    },
+    description: frontmatter.summary,
+    mainEntityOfPage: url,
+    url: url,
+    articleSection: frontmatter.tags.join(", "),
+    keywords: frontmatter.tags.join(", "),
+    wordCount: wordCount,
+    timeRequired: timeToRead + "M",
+    isAccessibleForFree: true,
+    hasPart: {
+      "@type": "WebPageElement",
+      isAccessibleForFree: true,
+    },
+  };
+
   return (
     <>
+      <script type="application/ld+json">{JSON.stringify(microdata)}</script>
       <title>{frontmatter.title} | Saiid's Blog</title>
       <meta name="description" content={frontmatter.summary} />
       <meta name="keywords" content={frontmatter.tags.join(", ")} />

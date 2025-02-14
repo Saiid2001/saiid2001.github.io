@@ -32,6 +32,15 @@ const PersonSchema = {
   "email": "saiid.elhajjchehade@epfl.ch",
 };
 
+const ProfilePageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@id": "main-entity",
+    ...PersonSchema
+  }
+};
+
 export const SEO: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   return (
     <>
@@ -39,6 +48,9 @@ export const SEO: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
 
       <script type="application/ld+json">
         {JSON.stringify(PersonSchema)}
+      </script>
+      <script type="application/ld+json">
+        {JSON.stringify(ProfilePageSchema)}
       </script>
       <meta charSet="utf-8" />
       <meta lang="en" />
