@@ -88,7 +88,7 @@ export const Banner: React.FC<{
             </h1>
 
             {/* Schema Microdata */}
-            <div
+            {/* <div
               itemScope
               itemType="http://schema.org/Person"
               className="hidden"
@@ -106,7 +106,7 @@ export const Banner: React.FC<{
                 <span itemProp="addressCountry">Switzerland</span>
               </span>
               <span itemProp="telephone">+41 21 693 99 77</span>
-            </div>
+            </div> */}
 
             <div className="relative max-md:flex max-md:flex-col max-md:gap-4">
               <div

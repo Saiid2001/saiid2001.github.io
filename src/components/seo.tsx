@@ -1,10 +1,45 @@
 import * as React from "react";
 
+
+const PersonSchema = {
+  "@context": "https://schema.org/",
+  "@type": "Person",
+  "name": "Saiid El Hajj Chehade",
+  "url": "https://saiid.ch",
+  "image": "https://github.com/Saiid2001/saiid2001.github.io/blob/main/src/images/profile.png?raw=true",
+  "sameAs": [
+    "https://x.com/saiid_hc",
+    "https://www.linkedin.com/in/saiid-hc/",
+    "https://github.com/Saiid2001",
+    "https://saiid.ch"
+  ],
+  "jobTitle": "PhD Student",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "EPFL"
+  },
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "American University of Beirut"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Station 14",
+    "addressLocality": "Lausanne",
+    "postalCode": "1015",
+    "addressCountry": "Switzerland"
+  },
+  "email": "saiid.elhajjchehade@epfl.ch",
+};
+
 export const SEO: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   return (
     <>
       {children}
 
+      <script type="application/ld+json">
+        {JSON.stringify(PersonSchema)}
+      </script>
       <meta charSet="utf-8" />
       <meta lang="en" />
       <meta name="author" content="Saiid El Hajj Chehade" />
