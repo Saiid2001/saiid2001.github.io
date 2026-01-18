@@ -36,8 +36,8 @@ const Project: React.FC<{
 }> = ({ title, description, year, url, code_url, subtopics, finished }) => {
   const _subtopics = subtopics.split(",");
   return (
-    <div className="flex flex-row items-center justify-between gap-x-4 bg-secondary/10 border-4 border-secondary rounded cursor-default p-4">
-      <div>
+    <div className="flex flex-row items-start justify-between gap-x-4 bg-secondary/10 border-4 border-secondary rounded cursor-default p-4">
+      <div >
         <div className="flex flex-row items-center gap-x-1">
           <h3 className="text-xl uppercase font-normal text-secondary">
             {title}
@@ -157,7 +157,7 @@ export const Research: React.FC = () => {
           {projects.map((node: any, index: number) => (
             <Project key={index} {...node} />
           ))}
-          <NavigationLink to="/projects">view all publications</NavigationLink>
+          <NavigationLink to="/publications">view all publications</NavigationLink>
         </div>
       </div>
     </IndexSection>

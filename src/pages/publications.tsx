@@ -92,30 +92,17 @@ interface PublicationsPageProps extends PageProps {
     allReference: {
       nodes: PublicationProps[];
     };
-    allFile: {
-      nodes: {
-        name: string;
-        publicURL: string;
-      }[];
-    };
   }
 }
 
 const PublicationsPage: React.FC<PublicationsPageProps> = (props) => {
   const publications = props.data.allReference.nodes.map((node) => {
-
-    const paper_file = props.data.allFile.nodes.find(
-      (file) => file.name === node.key
-    );
-
-
     return {
       ...node,
       paper_key: node.key,
-      paper_file: paper_file ? paper_file.publicURL : "",
+      paper_file: `/papers/${node.key}.pdf`,
     };
-  }
-  );
+  });
 
   const groupedByYear = publications.reduce(
     (acc: Record<string, PublicationProps[]>, publication) => {
@@ -181,14 +168,5 @@ export const query = graphql`
         code_url
       }
     }
-
-    allFile(filter: { 
-      relativeDirectory: { eq: "_publications/papers" },
-    }) {
-      nodes {
-        name
-        publicURL
-      }
-    }
-}
+  }
 `;
