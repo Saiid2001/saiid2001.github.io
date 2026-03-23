@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SEO from '../components/SEO.astro';
+import { parseAllPublications } from '../lib/parse-bibtex';
+import PublicationsClient from '../components/PublicationsClient';
+
+const publications = parseAllPublications();
+
+const scholarlyArticles = publications.map((pub) => ({
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  headline: pub.title,
+  author: pub.author.split(' and ').map((name: string) => ({
+    "@type": "Person",
+    name: name.trim(),
+  })),
+  datePublished: pub.year,
+  publisher: { "@type": "Organization", name: pub.booktitle },
+  url: pub.url || undefined,
+}));
+---
+
+<BaseLayout title="Publications | saiid.ch">
+  <Fragment slot="head">
+    <SEO
+      title="Publications | Saiid El Hajj Chehade"
+      description="Research publications by Saiid El Hajj Chehade on web privacy, browser security, and fingerprinting at EPFL SPRING Lab."
+      path="/publications/"
+      keywords="Publications, Web Privacy, Web Security, EPFL, Research Papers"
+    />
+    {publications.map((pub) => (
+      <Fragment>
+        <meta name="citation_title" content={pub.title} />
+        <meta name="citation_author" content={pub.author} />
+        <meta name="citation_publication_date" content={pub.year} />
+        {pub.paper_file && <meta name="citation_pdf_url" content={`https://saiid.ch${pub.paper_file}`} />}
+      </Fragment>
+    ))}
+    {scholarlyArticles.map((article) => (
+      <script type="application/ld+json" set:html={JSON.stringify(article)} />
+    ))}
+  </Fragment>
+  <PublicationsClient publications={publications} client:load />
+</BaseLayout>
+
+<style>
+  @import '../styles/publications.css';
+</style>

@@ -1,0 +1,13 @@
+---
+interface Props {
+  name: string;
+}
+const { name } = Astro.props;
+---
+
+<span>
+  <span class="absolute w-screen h-10 gradient-overlay-2 z-20 left-0"></span>
+  <h1 class="text-4xl text-base-content font-mono">
+    GET <b>{name}</b>
+  </h1>
+</span>

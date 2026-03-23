@@ -2,7 +2,7 @@ import * as React from "react";
 
 // styles
 import "../styles/button.css";
-import Icon from "../images/svg/down_arrow.svg";
+import Icon from "../images/svg/down_arrow.svg?react";
 
 type ButtonProps = {
   onClick?: () => void;
@@ -70,7 +70,7 @@ export const IconAndTextButton: React.FC<
       className={
         "group font-bold font-mono btn btn-outline btn-sm p-0 pr-2 pointer-events-auto " +
         (props.accent
-          ? "text-secondary-light hover:bg-base-100 hover:text-base-content"
+          ? "text-[#3d2e1e] border-[#3d2e1e]/50 hover:bg-[#3d2e1e] hover:text-secondary"
           : "bg-secondary/5 text-secondary ")
       }
       onClick={props.onClick}
@@ -79,8 +79,8 @@ export const IconAndTextButton: React.FC<
         className={
           "w-7 h-full  flex items-center justify-center " +
           (props.accent
-            ? "bg-secondary-light group-hover:bg-secondary"
-            : "bg-secondary group-hover:bg-secondary-light")
+            ? "bg-[#3d2e1e] text-secondary group-hover:bg-[#2a1e10]"
+            : "bg-secondary text-base-100 group-hover:bg-secondary-light")
         }
       >
         <props.icon className="w-full -translate-x-[1px]" />

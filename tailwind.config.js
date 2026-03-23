@@ -4,10 +4,7 @@
 module.exports = {
   darkMode: 'class',
   content: [
-    `./src/pages/**/*.{js,jsx,ts,tsx}`,
-    `./src/components/**/*.{js,jsx,ts,tsx}`,
-    `./src/sections/**/*.{js,jsx,ts,tsx}`,
-    'node_modules/preline/dist/*.js',
+    './src/**/*.{astro,js,jsx,ts,tsx}',
   ],
   theme: {
     extend: {
@@ -19,6 +16,10 @@ module.exports = {
         secondary:{
           DEFAULT: "#E45826",
           light : "#E6D5B8",
+        },
+        muted: {
+          DEFAULT: "#b8a99a",
+          light: "#d4c8bb",
         },
         gray: {
           DEFAULT: "#aaaaaa",

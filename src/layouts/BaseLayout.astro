@@ -1,0 +1,48 @@
+---
+import Header from '../sections/header.tsx';
+import Footer from '../components/Footer.astro';
+import BackToTop from '../components/BackToTop.tsx';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  noMargin?: boolean;
+}
+
+const { title = "Saiid El Hajj Chehade's Personal Website", noMargin = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap&font-display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="/images/icon.png" />
+    <slot name="head" />
+    <script is:inline>
+      // Immediate theme initialization to prevent FOUC
+      (function() {
+        const stored = localStorage.getItem('theme');
+        const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const theme = stored || preferred;
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <main class:list={["mx-auto bg-base-100", noMargin ? "w-full" : "w-[100rem] max-w-full"]}>
+      <Header client:load />
+      <div>
+        <slot />
+      </div>
+      <Footer />
+      <BackToTop client:load />
+    </main>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Heading from '../../components/Heading.astro';
+import { getCollection } from 'astro:content';
+
+const blogs = await getCollection('blogs');
+const sortedBlogs = blogs.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+function estimateReadTime(body: string): number {
+  const words = body.split(/\s+/).length;
+  return Math.ceil(words / 200);
+}
+---
+
+<BaseLayout title="Blog | saiid.ch">
+  <Fragment slot="head">
+    <title>Saiid's Blog</title>
+  </Fragment>
+  <div class="flex flex-col items-left px-8 justify-center w-full min-h-[70vh] mt-32 max-md:px-4">
+    <Heading name="Blogs" />
+    <section class="flex flex-col gap-y-4 mt-10">
+      {sortedBlogs.map((blog) => (
+        <div
+          class="flex flex-row gap-4 p-4 py-14 border-b-2 border-base-content/20 hover:bg-secondary/5 transition-colors rounded max-md:py-4"
+        >
+          {blog.data.cover && (
+            <div class="w-40 max-md:hidden">
+              <img
+                src={blog.data.cover}
+                alt={blog.data.title}
+                class="h-40 w-40 rounded-full aspect-square object-cover"
+              />
+            </div>
+          )}
+          <div class="flex flex-col gap-y-2 grow-0">
+            <a href={`/blog/${blog.data.slug}/`} class="text-3xl font-bold font-mono text-base-content hover:text-secondary transition-colors">
+              {blog.data.title}
+            </a>
+            <p class="text-lg text-muted">
+              {formatDate(blog.data.date)} | {estimateReadTime(blog.body ?? '')} min read
+            </p>
+            {blog.data.tags.map((tag) => (
+              <span class="badge badge-outline mr-2">{tag}</span>
+            ))}
+            <p class="text-lg">
+              {blog.data.summary}
+              <a href={`/blog/${blog.data.slug}/`} class="text-secondary font-normal italic"> Read More</a>
+            </p>
+          </div>
+        </div>
+      ))}
+    </section>
+  </div>
+</BaseLayout>

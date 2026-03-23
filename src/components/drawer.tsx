@@ -1,12 +1,12 @@
 import * as React from "react";
-import { PropsWithChildren } from "react";
 
 interface DrawerProps {
   isOpen: boolean;
   onClose?: () => void;
+  children?: React.ReactNode;
 }
 
-export const Drawer: React.FC<PropsWithChildren<DrawerProps>> = ({
+export const Drawer: React.FC<DrawerProps> = ({
   isOpen,
   onClose,
   children,

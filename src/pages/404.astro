@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Heading from '../components/Heading.astro';
+---
+
+<BaseLayout title="Not found">
+  <Fragment slot="head">
+    <title>404 | saiid.ch</title>
+  </Fragment>
+  <main class="flex flex-col items-center justify-center w-full min-h-[70vh] mt-32 px-8">
+    <Heading name="/404" />
+    <p class="mt-8 mb-4 text-xl text-muted">
+      Sorry, we couldn't find what you were looking for.
+    </p>
+    <p class="font-mono text-secondary">
+      <a href="/" class="hover:underline">&larr; GET /</a>
+    </p>
+  </main>
+</BaseLayout>

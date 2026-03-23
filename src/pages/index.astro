@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SEO from '../components/SEO.astro';
+import Heading from '../components/Heading.astro';
+import { Banner } from '../sections/banner';
+import { News } from '../sections/news';
+import { Research } from '../sections/research';
+import { getCollection, render } from 'astro:content';
+import { loadResearch, loadSummaryHtml } from '../lib/data';
+import { parseAllPublications } from '../lib/parse-bibtex';
+import { remark } from 'remark';
+import remarkHtml from 'remark-html';
+
+// Load data at build time
+const summaryHtml = await loadSummaryHtml();
+const research = loadResearch();
+const publications = parseAllPublications();
+const favoriteProjects = publications.filter((p) => p.favorite);
+
+// Load news and render HTML
+const newsEntries = await getCollection('news');
+const sortedNews = newsEntries.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+const newsItems = await Promise.all(
+  sortedNews.map(async (entry) => {
+    // Use remark to render the markdown body to HTML
+    const body = entry.body ?? '';
+    const result = await remark().use(remarkHtml, { sanitize: false }).process(body);
+    return {
+      id: entry.id,
+      html: String(result),
+      date: entry.data.date.toISOString(),
+      category: entry.data.category,
+    };
+  })
+);
+---
+
+<BaseLayout>
+  <SEO slot="head" />
+  <Banner summaryHtml={summaryHtml} client:load />
+  <div class="flex flex-col items-left pl-32 my-10 w-full pr-8 max-lg:pl-8">
+    <Heading name="/news" />
+    <News news={newsItems} client:load />
+  </div>
+  <div class="flex flex-col items-left pl-32 my-10 w-full pr-8 max-lg:pl-8">
+    <Heading name="/research" />
+    <Research research={research} projects={favoriteProjects} client:load />
+  </div>
+</BaseLayout>
