@@ -51,23 +51,36 @@ function hashDateString(): string {
   return result;
 }
 
+function canScramble(): boolean {
+  if (typeof window === "undefined") return false;
+  return !window.matchMedia("(max-width: 768px)").matches && !window.matchMedia("(hover: none)").matches;
+}
+
 const EmailCTA: React.FC = () => {
-  const [displayText, setDisplayText] = React.useState(
-    hashDateString()
-  );
+  const [displayText, setDisplayText] = React.useState(EMAIL);
   const [copied, setCopied] = React.useState(false);
-  const [revealed, setRevealed] = React.useState(false);
+  const [revealed, setRevealed] = React.useState(true);
   const timerRef = React.useRef<ReturnType<typeof setInterval> | null>(null);
   const ref = React.useRef<HTMLButtonElement>(null);
 
-  // On small screens / touch devices, skip scrambling entirely
+  // Sync scramble state with screen size
   React.useEffect(() => {
-    const isSmall = window.matchMedia("(max-width: 768px)").matches;
-    const isTouchDevice = window.matchMedia("(hover: none)").matches;
-    if (isSmall || isTouchDevice) {
-      setDisplayText(EMAIL);
-      setRevealed(true);
+    if (canScramble()) {
+      setDisplayText(hashDateString());
+      setRevealed(false);
     }
+
+    function onResize() {
+      if (!canScramble()) {
+        clearTimer();
+        setDisplayText(EMAIL);
+        setRevealed(true);
+      }
+    }
+
+    const mq = window.matchMedia("(max-width: 768px)");
+    mq.addEventListener("change", onResize);
+    return () => mq.removeEventListener("change", onResize);
   }, []);
 
   function clearTimer() {
@@ -78,10 +91,7 @@ const EmailCTA: React.FC = () => {
   }
 
   function scrambleReveal() {
-    if (timerRef.current) return;
-    if (typeof window !== "undefined" &&
-      (window.matchMedia("(hover: none)").matches || window.matchMedia("(max-width: 768px)").matches)
-    ) return;
+    if (timerRef.current || !canScramble()) return;
     setRevealed(false);
     const target = EMAIL;
     const duration = 800;
@@ -111,10 +121,7 @@ const EmailCTA: React.FC = () => {
   }
 
   function rescramble() {
-    if (copied) return;
-    if (typeof window !== "undefined" &&
-      (window.matchMedia("(hover: none)").matches || window.matchMedia("(max-width: 768px)").matches)
-    ) return;
+    if (copied || !canScramble()) return;
     clearTimer();
     setRevealed(false);
     setDisplayText(

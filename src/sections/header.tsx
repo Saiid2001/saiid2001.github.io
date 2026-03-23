@@ -134,8 +134,8 @@ export const Navigation: React.FC<{ scrolled: boolean; vertical?: boolean }> = (
       <a
         href="/publications/"
         className={
-          "font-light hover:underline " +
-          (scrolled ? "text-[#3d2e1e] hover:text-[#2a1e10]" : "text-base-content hover:text-secondary")
+          "!font-light hover:underline " +
+          (scrolled ? "!text-[#3d2e1e] hover:!text-[#2a1e10]" : "!text-base-content hover:!text-secondary")
         }
       >
         publications
@@ -143,8 +143,8 @@ export const Navigation: React.FC<{ scrolled: boolean; vertical?: boolean }> = (
       <a
         href="/projects/"
         className={
-          "font-light hover:underline " +
-          (scrolled ? "text-[#3d2e1e] hover:text-[#2a1e10]" : "text-base-content hover:text-secondary")
+          "!font-light hover:underline " +
+          (scrolled ? "!text-[#3d2e1e] hover:!text-[#2a1e10]" : "!text-base-content hover:!text-secondary")
         }
       >
         projects
@@ -152,8 +152,8 @@ export const Navigation: React.FC<{ scrolled: boolean; vertical?: boolean }> = (
       <a
         href="/blog/"
         className={
-          "font-light hover:underline " +
-          (scrolled ? "text-[#3d2e1e] hover:text-[#2a1e10]" : "text-base-content hover:text-secondary")
+          "!font-light hover:underline " +
+          (scrolled ? "!text-[#3d2e1e] hover:!text-[#2a1e10]" : "!text-base-content hover:!text-secondary")
         }
       >
         blog
