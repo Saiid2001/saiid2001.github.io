@@ -1,0 +1,10 @@
+# Security Policy for saiid.ch
+# https://securitytxt.org/
+
+Contact: mailto:saiid.elhajjchehade@epfl.ch
+Encryption: https://saiid.ch/pgp.asc
+Expires: 2027-04-01T00:00:00.000Z
+Preferred-Languages: en, fr, ar
+Canonical: https://saiid.ch/.well-known/security.txt
+
+# PGP Fingerprint: 1047 F0C3 BF4A 4FDE 9643 4982 2E3E EBEA 532E 36C5
