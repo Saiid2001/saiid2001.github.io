@@ -1,0 +1,115 @@
+%-------------------------------------------------------------------------------
+% CONFIGURATIONS
+%-------------------------------------------------------------------------------
+% A4 paper size by default, use 'letterpaper' for US letter
+\documentclass[11pt, a4paper]{russell}
+\usepackage{apacite}
+\usepackage{bibentry}
+\makeatletter\let\saved@bibitem\@bibitem\makeatother
+\usepackage{hyperref}
+\makeatletter\let\@bibitem\saved@bibitem\makeatother
+
+
+% hanging publications: 1st line starts at beginning of line, 
+% further lines are placed a bit to the right
+\usepackage{hanging}	
+
+\newcommand\publication[1]{%
+	\smallskip\par\hangpara{1.5em}{1}\bibentry{#1}\smallskip
+}
+% Configure page margins with geometry
+\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.5cm, footskip=.5cm}
+
+% Specify the location of the included fonts
+\fontdir[fonts/]
+
+% Color for highlights
+% russell Colors: russell-emerald, russell-skyblue, russell-red, russell-pink, russell-orange
+%                 russell-nephritis, russell-concrete, russell-darknight, russell-purple
+\colorlet{russell}{russell-black}
+% Uncomment if you would like to specify your own color
+% \definecolor{russell}{HTML}{CA63A8}
+
+% Colors for text
+% Uncomment if you would like to specify your own color
+% \definecolor{darktext}{HTML}{414141}
+% \definecolor{text}{HTML}{333333}
+% \definecolor{graytext}{HTML}{5D5D5D}
+% \definecolor{lighttext}{HTML}{999999}
+
+% Set false if you don't want to highlight section with russell color
+\setbool{acvSectionColorHighlight}{true}
+
+% If you would like to change the social information separator from a pipe (|) to something else
+\renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+\newcommand{\githubURL}[1]{\href{https://#1}{\faGithubSquare\acvHeaderIconSep#1}}
+\newcommand{\paperURL}[2]{\href{https://#1}{\faFile*[regular]\acvHeaderIconSep#2}}
+
+%-------------------------------------------------------------------------------
+%	PERSONAL INFORMATION
+%	Comment any of the lines below if they are not required
+%-------------------------------------------------------------------------------
+% Available options: circle|rectangle,edge/noedge,left/right
+% \photo[rectangle,edge,right]{./examples/profile}
+\name{El Hajj Chehade,}{Saiid}
+% \position{Software Architect{\enskip\cdotp\enskip}Security Expert}
+\address{BC 266, EPFL CH-1014 Lausanne, Switzerland}
+
+\mobile{+41-216939977}
+\email{saiid.elhajjchehade@epfl.ch}
+%\dateofbirth{January 1st, 1970}
+\homepage{saiid.ch} 
+\github{github.com/saiid2001}
+\linkedin{linkedin.com/in/saiid-hc}
+% \gitlab{gitlab-id}
+% \stackoverflow{SO-id}{SO-name}
+% \twitter{@twit}
+% \skype{skype-id}
+% \reddit{reddit-id}
+% \medium{madium-id}
+% \kaggle{kaggle-id}
+% \googlescholar{googlescholar-id}{name-to-display}
+%% \firstname and \lastname will be used
+\googlescholar{gF0rvJAAAAAJ}{}
+% \extrainfo{extra information}
+
+% \quote{``Simplicity is deceptively complicated."}
+
+
+%-------------------------------------------------------------------------------
+\begin{document}
+
+\nobibliography{publications}
+	\bibliographystyle{apacite}
+% Print the header with above personal informations
+% Give optional argument to change alignment(C: center, L: left, R: right)
+\makecvheader
+% Print the footer with 3 arguments(<left>, <center>, <right>)
+% Leave any of these blank if they are not needed
+\makecvfooter
+  {\today}
+  {}
+  {\thepage}
+
+
+%-------------------------------------------------------------------------------
+%	CV/RESUME CONTENT
+%	Each section is imported separately, open each file in turn to modify content
+%-------------------------------------------------------------------------------
+%\input{cv/summary.tex}
+
+\input{cv/education.tex}
+\input{cv/experience.tex}
+\input{cv/publications.tex}
+\input{cv/projects.tex}
+\input{cv/teaching.tex}
+\input{cv/skills.tex}
+\input{cv/certificates.tex}
+\input{cv/languages.tex}
+\input{cv/achievements.tex}
+\input{cv/outreach.tex}
+
+\vspace*{\fill}
+%\centering{\textbf{References available upon request.}}
+%-------------------------------------------------------------------------------
+\end{document}
