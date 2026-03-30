@@ -231,7 +231,7 @@ export const Banner: React.FC<{ summaryHtml: string }> = ({ summaryHtml }) => {
             <img
               src="/images/profile.jpeg"
               alt="Portrait of Saiid El Hajj Chehade"
-              className="min-h-72 h-full max-md:h-52 max-md:min-h-0 max-md:w-52 max-md:rounded-full object-cover profile-fade"
+              className="min-h-72 h-full max-h-96 max-md:h-52 max-md:min-h-0 max-md:w-52 max-md:rounded-full object-cover profile-fade"
             />
           </div>
         </div>
