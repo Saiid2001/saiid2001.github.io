@@ -229,7 +229,7 @@ export const Banner: React.FC<{ summaryHtml: string }> = ({ summaryHtml }) => {
           </section>
           <div className="relative max-md:flex max-md:justify-center">
             <img
-              src="/images/profile.png"
+              src="/images/profile.jpeg"
               alt="Portrait of Saiid El Hajj Chehade"
               className="min-h-72 h-full max-md:h-52 max-md:min-h-0 max-md:w-52 max-md:rounded-full object-cover profile-fade"
             />
@@ -243,7 +243,7 @@ export const Banner: React.FC<{ summaryHtml: string }> = ({ summaryHtml }) => {
       }>
         <div className="flex flex-row items-top gap-x-4 justify-stretch w-full">
           <img
-            src="/images/profile.png"
+            src="/images/profile.jpeg"
             alt="Profile picture"
             className="h-28 w-28 object-cover"
           />

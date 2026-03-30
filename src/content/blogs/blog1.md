@@ -4,7 +4,7 @@ date: "2024-07-09"
 slug: "welcome"
 tags: ["general"]
 summary: "An introduction to my blog"
-cover: "/images/profile.png"
+cover: "/images/profile.jpeg"
 ---
 
 
