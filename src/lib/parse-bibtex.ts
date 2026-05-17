@@ -1,11 +1,17 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+export type PublicationStatus = 'published' | 'preprint' | 'submitted';
+
 export interface Publication {
   key: string;
+  entryType: string;
+  status: PublicationStatus;
   title: string;
   author: string;
   booktitle: string;
+  journal: string;
+  note: string;
   year: string;
   raw: string;
   shorttitle: string;
@@ -19,13 +25,20 @@ export interface Publication {
   paper_file: string;
 }
 
+function paperFileForKey(key: string): string {
+  const rel = `papers/${key}.pdf`;
+  const abs = path.resolve('public', rel);
+  return fs.existsSync(abs) ? `/${rel}` : '';
+}
+
 function parseBibEntry(content: string): Publication | null {
   // Match @type{key, ... }
-  const entryMatch = content.match(/@\w+\{([^,]+),\s*([\s\S]*)\}/);
+  const entryMatch = content.match(/@(\w+)\s*\{([^,]+),\s*([\s\S]*)\}/);
   if (!entryMatch) return null;
 
-  const key = entryMatch[1].trim();
-  const body = entryMatch[2];
+  const entryType = entryMatch[1].trim().toLowerCase();
+  const key = entryMatch[2].trim();
+  const body = entryMatch[3];
 
   const fields: Record<string, string> = {};
   // Match field = {value} or field = "value"
@@ -37,11 +50,24 @@ function parseBibEntry(content: string): Publication | null {
     fields[fieldName] = value;
   }
 
+  let status: PublicationStatus;
+  if (fields.status === 'preprint') {
+    status = 'preprint';
+  } else if (entryType === 'unpublished') {
+    status = 'submitted';
+  } else {
+    status = 'published';
+  }
+
   return {
     key,
+    entryType,
+    status,
     title: fields.title || '',
     author: fields.author || '',
     booktitle: fields.booktitle || '',
+    journal: fields.journal || '',
+    note: fields.note || '',
     year: fields.year || '',
     raw: content.trim(),
     shorttitle: fields.shorttitle || '',
@@ -52,7 +78,7 @@ function parseBibEntry(content: string): Publication | null {
     subtopics: fields.subtopics || '',
     favorite: fields.favorite === '1',
     keywords: fields.keywords || '',
-    paper_file: `/papers/${key}.pdf`,
+    paper_file: paperFileForKey(key),
   };
 }
 

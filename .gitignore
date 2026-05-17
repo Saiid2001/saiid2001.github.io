@@ -6,3 +6,15 @@ dist/
 .astro/
 .playwright-mcp/
 public/cv.pdf
+
+# LaTeX build artifacts
+cv-source/*.pdf
+cv-source/*.aux
+cv-source/*.bbl
+cv-source/*.blg
+cv-source/*.fdb_latexmk
+cv-source/*.fls
+cv-source/*.log
+cv-source/*.out
+cv-source/*.xdv
+cv-source/*.synctex.gz
