@@ -1,22 +1,38 @@
+% !TEX program = xelatex
+% !BIB program = biber
 %-------------------------------------------------------------------------------
 % CONFIGURATIONS
 %-------------------------------------------------------------------------------
 % A4 paper size by default, use 'letterpaper' for US letter
 \documentclass[11pt, a4paper]{russell}
-\usepackage{natbib}
-\usepackage{bibentry}
 \usepackage{hyperref}
 
+% Iterate publications.bib and filter by entry type (no per-entry listing).
+\usepackage[backend=biber, sorting=none, style=numeric, defernumbers=true]{biblatex}
+\addbibresource{publications.bib}
 
-% hanging publications: 1st line starts at beginning of line, 
-% further lines are placed a bit to the right
-\usepackage{hanging}	
+% Drop the default quotes around titles in the numeric style.
+\DeclareFieldFormat{title}{#1}
+\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1}
 
-\newcommand\publication[1]{%
-	\smallskip\par\hangpara{1.5em}{1}\bibentry{#1}\smallskip
-}
+% Hanging-indent entries with no [N] label — matches the prior \publication look.
+% Trick: leftmargin pushes the whole entry right, itemindent pulls line 1 back.
+\defbibenvironment{bibliography}
+  {\list{}
+     {\setlength{\leftmargin}{1.5em}%
+      \setlength{\itemindent}{-1.5em}%
+      \setlength{\labelwidth}{0pt}%
+      \setlength{\labelsep}{0pt}%
+      \setlength{\itemsep}{\smallskipamount}%
+      \setlength{\parsep}{0pt}}}
+  {\endlist}
+  {\item}
 % Configure page margins with geometry
 \geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.5cm, footskip=.5cm}
+
+% Fix overlapping text by increasing section/entry spacing
+\renewcommand{\acvSectionTopSkip}{3.5mm}
+\renewcommand{\acvSectionContentTopSkip}{2.5mm}
 
 % Specify the location of the included fonts
 \fontdir[fonts/]
@@ -51,12 +67,11 @@
 % \photo[rectangle,edge,right]{./examples/profile}
 \name{El Hajj Chehade,}{Saiid}
 % \position{Software Architect{\enskip\cdotp\enskip}Security Expert}
-\address{BC 266, EPFL CH-1014 Lausanne, Switzerland}
+\address{BC 262, EPFL CH-1014 Lausanne, Switzerland}
 
-\mobile{+41-216939977}
 \email{saiid.elhajjchehade@epfl.ch}
 %\dateofbirth{January 1st, 1970}
-\homepage{saiid.ch} 
+\homepage{saiid.ch}
 \github{github.com/saiid2001}
 \linkedin{linkedin.com/in/saiid-hc}
 % \gitlab{gitlab-id}
@@ -77,8 +92,7 @@
 %-------------------------------------------------------------------------------
 \begin{document}
 
-\nobibliography{publications}
-	\bibliographystyle{plainnat}
+\nocite{*}
 % Print the header with above personal informations
 % Give optional argument to change alignment(C: center, L: left, R: right)
 \makecvheader
@@ -94,20 +108,15 @@
 %	CV/RESUME CONTENT
 %	Each section is imported separately, open each file in turn to modify content
 %-------------------------------------------------------------------------------
-%\input{cv/summary.tex}
 
 \input{cv/education.tex}
-\input{cv/experience.tex}
 \input{cv/publications.tex}
-\input{cv/projects.tex}
+\input{cv/talks.tex}
+\input{cv/experience.tex}
 \input{cv/teaching.tex}
-\input{cv/skills.tex}
-\input{cv/certificates.tex}
-\input{cv/languages.tex}
 \input{cv/achievements.tex}
 \input{cv/outreach.tex}
+\input{cv/skills.tex}
 
-\vspace*{\fill}
-%\centering{\textbf{References available upon request.}}
 %-------------------------------------------------------------------------------
 \end{document}

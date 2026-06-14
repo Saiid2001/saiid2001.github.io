@@ -7,15 +7,13 @@
 
 %-------------------------------------------------------------------------------
 %	CONTENT
+%	Entries are pulled from ../publications.bib; published vs. under-submission
+%	are split by BibTeX entry type (@inproceedings/@article vs. @unpublished).
+%	Per-entry GitHub links live in the bib `note` field.
 %-------------------------------------------------------------------------------
 
-\publication{vsf2025}
-    \githubURL{github.com/Saiid2001/vsf}
-    
-\publication{flfp2025}
-    \githubURL{github.com/spring-epfl/flfp}
+\printbibliography[nottype=unpublished, heading=none]
 
-\publication{sinbad2024}
-    \githubURL{github.com/spring-epfl/sinbad}
+\subsubsection*{Work in Progress / Under Submission}
 
-\subsubsection*{Work in Progress / Submitted}
+\printbibliography[type=unpublished, heading=none]

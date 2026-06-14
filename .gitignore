@@ -18,3 +18,6 @@ cv-source/*.log
 cv-source/*.out
 cv-source/*.xdv
 cv-source/*.synctex.gz
+cv-source/.latexmkrc
+cv-source/resume.bcf
+cv-source/resume.run.xml
