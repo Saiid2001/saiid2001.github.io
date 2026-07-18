@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://saiid.ch/sitemap-index.xml

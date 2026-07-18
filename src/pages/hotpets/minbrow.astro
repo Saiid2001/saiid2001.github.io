@@ -1,0 +1,153 @@
+---
+import '../../styles/global.css';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="googlebot" content="noindex, nofollow" />
+    <title>minbrow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap&font-display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="/images/icon.png" />
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem('theme');
+        const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', stored || preferred);
+      })();
+    </script>
+  </head>
+  <body class="bg-base-100">
+    <main class="flex flex-col items-center justify-center w-full min-h-screen px-8 pb-32">
+      <div class="flex flex-col items-center max-w-2xl w-full gap-8">
+        <h2
+          id="minbrow-label"
+          class="text-secondary font-mono text-lg tracking-wide"
+        ></h2>
+        <p
+          id="minbrow-sentence"
+          class="text-2xl text-base-content font-mono text-center min-h-[6rem]"
+        ></p>
+        <nav class="flex items-center gap-8 font-mono">
+          <button
+            id="minbrow-prev"
+            type="button"
+            aria-label="Previous scenario"
+            class="text-3xl text-base-content hover:text-secondary disabled:opacity-30 disabled:hover:text-base-content transition-colors"
+          >&lt; Back</button>
+          <span
+            id="minbrow-counter"
+            class="text-sm text-base-content/60 tabular-nums"
+          ></span>
+          <button
+            id="minbrow-next"
+            type="button"
+            aria-label="Next scenario"
+            class="text-3xl text-base-content hover:text-secondary disabled:opacity-30 disabled:hover:text-base-content transition-colors"
+          >Next &gt;</button>
+        </nav>
+      </div>
+    </main>
+
+    <footer class="fixed bottom-0 left-0 right-0 px-8 py-4 text-center font-mono text-xs text-base-content/60 bg-base-100/80 backdrop-blur">
+      <p>
+        For further discussions about minbrow, reach out to the authors:
+        <a
+          href="mailto:saiid.elhajjchehade@epfl.ch"
+          class="text-secondary hover:underline"
+        >saiid.elhajjchehade@epfl.ch</a>
+        <span aria-hidden="true"> &middot; </span>
+        <a
+          href="mailto:eric.jolles@epfl.ch"
+          class="text-secondary hover:underline"
+        >eric.jolles@epfl.ch</a>
+      </p>
+    </footer>
+
+    <script is:inline>
+      (function () {
+        const COOKIE_NAME = 'minbrow_group';
+        const ONE_YEAR = 60 * 60 * 24 * 365;
+
+        function readCookie(name) {
+          const match = document.cookie.match(
+            new RegExp('(?:^|; )' + name + '=([^;]*)')
+          );
+          return match ? decodeURIComponent(match[1]) : null;
+        }
+
+        function writeCookie(name, value) {
+          document.cookie =
+            name +
+            '=' +
+            encodeURIComponent(value) +
+            '; path=/; max-age=' +
+            ONE_YEAR +
+            '; SameSite=Lax';
+        }
+
+        let group = readCookie(COOKIE_NAME);
+        if (group !== 'a' && group !== 'b') {
+          group = Math.random() < 0.5 ? 'a' : 'b';
+          writeCookie(COOKIE_NAME, group);
+        }
+
+        // TODO: replace these scenarios with your talk copy.
+        const scenarios = {
+          a: [
+            'You are an investigative journalist reading an article about the use of AI in war.',
+            'You are an investigative journalist searching for other articles about the use of AI in war.'
+          ],
+          b: [
+            'You are a rights activist reading an article about the use of AI in war.',
+            'You are a rights activist writing comments on the article about the use of AI in war.',
+          ],
+        };
+
+        const list = scenarios[group];
+        const labelEl = document.getElementById('minbrow-label');
+        const sentenceEl = document.getElementById('minbrow-sentence');
+        const counterEl = document.getElementById('minbrow-counter');
+        const prevEl = document.getElementById('minbrow-prev');
+        const nextEl = document.getElementById('minbrow-next');
+
+        let i = 0;
+
+        function render() {
+          labelEl.textContent = 'Scenario ' + (i + 1);
+          sentenceEl.textContent = list[i];
+          counterEl.textContent = i + 1 + ' / ' + list.length;
+          prevEl.disabled = i === 0;
+          nextEl.disabled = i === list.length - 1;
+        }
+
+        prevEl.addEventListener('click', function () {
+          if (i > 0) {
+            i--;
+            render();
+          }
+        });
+        nextEl.addEventListener('click', function () {
+          if (i < list.length - 1) {
+            i++;
+            render();
+          }
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowLeft') prevEl.click();
+          else if (e.key === 'ArrowRight') nextEl.click();
+        });
+
+        render();
+      })();
+    </script>
+  </body>
+</html>
