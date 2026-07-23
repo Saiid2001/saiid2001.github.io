@@ -34,4 +34,15 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { news, blogs, projects };
+const announcements = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/announcements' }),
+  schema: z.object({
+    date: z.coerce.date(),
+    expires: z.coerce.date().optional(),
+    level: z.enum(['info', 'highlight', 'urgent']).default('highlight'),
+    link: z.string().optional(),
+    linkLabel: z.string().optional(),
+  }),
+});
+
+export const collections = { news, blogs, projects, announcements };

@@ -1,0 +1,78 @@
+---
+import { getCollection, render } from 'astro:content';
+
+const now = new Date();
+const raw = await getCollection('announcements');
+const active = raw
+  .filter((entry) => !entry.data.expires || entry.data.expires >= now)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const rendered = await Promise.all(
+  active.map(async (entry) => {
+    const { Content } = await render(entry);
+    return { entry, Content };
+  })
+);
+
+const levelStyles: Record<string, string> = {
+  info: 'border-info/60 bg-info/5 text-info',
+  highlight: 'border-secondary/70 bg-secondary/10 text-secondary',
+  urgent: 'border-error/70 bg-error/10 text-error',
+};
+
+const levelLabel: Record<string, string> = {
+  info: 'FYI',
+  highlight: 'Announcement',
+  urgent: 'Urgent',
+};
+---
+
+{rendered.length > 0 && (
+  <div class="flex flex-col gap-y-3">
+    {rendered.map(({ entry, Content }) => {
+      const level = entry.data.level;
+      const styles = levelStyles[level] ?? levelStyles.highlight;
+      return (
+        <div
+          class={`relative border-l-4 rounded-r px-5 py-4 flex flex-col gap-y-2 max-w-[800px] ${styles}`}
+          role={level === 'urgent' ? 'alert' : 'note'}
+        >
+          <div class="flex flex-row items-center gap-x-3">
+            <span class="font-mono text-xs uppercase tracking-wider">
+              {levelLabel[level] ?? 'Announcement'}
+            </span>
+            <span class="font-mono text-xs text-muted">
+              {entry.data.date.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
+              })}
+            </span>
+          </div>
+          <div class="text-base-content announcement-body">
+            <Content />
+          </div>
+          {entry.data.link && (
+            <a
+              href={entry.data.link}
+              class="self-start font-mono text-sm underline hover:no-underline"
+              target={entry.data.link.startsWith('http') ? '_blank' : undefined}
+              rel={entry.data.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+            >
+              {entry.data.linkLabel ?? 'Learn more'} →
+            </a>
+          )}
+        </div>
+      );
+    })}
+  </div>
+)}
+
+<style is:global>
+  .announcement-body p {
+    margin: 0;
+  }
+  .announcement-body a {
+    text-decoration: underline;
+  }
+</style>

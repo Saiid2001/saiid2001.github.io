@@ -25,13 +25,37 @@ function statusBadgeLabel(status: Publication['status']): string | null {
   return null;
 }
 
+function isExternal(url: string): boolean {
+  return /^https?:\/\//i.test(url);
+}
+
 const PublicationCard: React.FC<{ pub: Publication }> = ({ pub }) => {
   const [copied, setCopied] = React.useState(false);
+  const [linkCopied, setLinkCopied] = React.useState(false);
 
   function copy() {
     navigator.clipboard.writeText(pub.raw);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  }
+
+  function download() {
+    const blob = new Blob([pub.raw + "\n"], { type: "application/x-bibtex" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${pub.key}.bib`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function copyLink() {
+    const href = `${window.location.origin}${window.location.pathname}#${pub.key}`;
+    navigator.clipboard.writeText(href);
+    setLinkCopied(true);
+    setTimeout(() => setLinkCopied(false), 2000);
   }
 
   React.useEffect(() => {
@@ -46,9 +70,16 @@ const PublicationCard: React.FC<{ pub: Publication }> = ({ pub }) => {
     }
   }, []);
 
+  const linkUrl = pub.url && isExternal(pub.url) ? pub.url : '';
+
   return (
     <div id={pub.key} className="flex flex-col gap-y-2 relative group pl-8">
-      <a href={"#" + pub.key} className="text-lg font-semibold absolute left-4 hidden group-hover:block">
+      <a
+        href={"#" + pub.key}
+        className="text-lg font-semibold absolute left-4 opacity-0 group-hover:opacity-100 transition-opacity"
+        aria-label="Anchor link to this publication"
+        title="Link to this publication"
+      >
         #
       </a>
       <div className="flex flex-row flex-wrap items-center gap-x-3 gap-y-1">
@@ -58,40 +89,84 @@ const PublicationCard: React.FC<{ pub: Publication }> = ({ pub }) => {
             {statusBadgeLabel(pub.status)}
           </span>
         )}
+        {pub.status === 'published' && pub.year && (
+          <span className="badge badge-outline border-muted text-muted font-mono text-xs">
+            {pub.year}
+          </span>
+        )}
       </div>
       <p className="text-lg text-muted">{pub.author}</p>
       {venueText(pub) && (
         <p className="text-lg italic text-muted">{venueText(pub)}</p>
       )}
-      <section className="flex flex-row gap-x-2">
+      <section className="flex flex-row flex-wrap gap-x-2 gap-y-1">
         {pub.paper_file && (
-          <p>
-            [<a href={pub.paper_file} className="underline">
-              Paper
-            </a>]
-          </p>
+          <a
+            href={pub.paper_file}
+            className="btn btn-xs btn-outline border-muted text-muted hover:btn-secondary hover:border-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open PDF"
+          >
+            Paper (PDF)
+          </a>
+        )}
+        {linkUrl && (
+          <a
+            href={linkUrl}
+            className="btn btn-xs btn-outline border-muted text-muted hover:btn-secondary hover:border-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open publisher / DOI page"
+          >
+            {/\bdoi\b/i.test(linkUrl) ? 'DOI' : 'Link'}
+          </a>
         )}
         {pub.code_url && (
-          <p>
-            [<a href={pub.code_url} className="underline" target="_blank" rel="noopener noreferrer">
-              Code
-            </a>]
-          </p>
+          <a
+            href={pub.code_url}
+            className="btn btn-xs btn-outline border-muted text-muted hover:btn-secondary hover:border-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open code repository"
+          >
+            Code
+          </a>
         )}
+        <button
+          type="button"
+          onClick={copyLink}
+          className="btn btn-xs btn-outline border-muted text-muted hover:btn-secondary hover:border-secondary"
+          title="Copy link to this publication"
+        >
+          {linkCopied ? 'Link copied!' : 'Share'}
+        </button>
       </section>
       {pub.status !== 'submitted' && (
         <details className="flex flex-col gap-y-2 pr-40 max-lg:pr-0">
-          <summary className="text-lg font-semibold">BibTeX</summary>
+          <summary className="text-lg font-semibold cursor-pointer">BibTeX</summary>
           <div className="relative">
-            <p className="font-mono text-secondary bg-secondary/20 p-8 pt-12 break-all">
+            <pre className="font-mono text-sm text-secondary bg-secondary/20 p-4 pt-16 whitespace-pre-wrap break-all rounded">
               {pub.raw}
-            </p>
-            <button
-              className="btn btn-secondary btn-ghost absolute top-0 left-0"
-              onClick={copy}
-            >
-              {copied ? "Copied!" : "Copy to clipboard"}
-            </button>
+            </pre>
+            <div className="absolute top-2 left-2 flex flex-row gap-x-2">
+              <button
+                type="button"
+                className="btn btn-xs btn-secondary"
+                onClick={download}
+                title={`Download ${pub.key}.bib`}
+              >
+                Download .bib
+              </button>
+              <button
+                type="button"
+                className="btn btn-xs btn-secondary btn-outline"
+                onClick={copy}
+                title="Copy BibTeX to clipboard"
+              >
+                {copied ? 'Copied!' : 'Copy'}
+              </button>
+            </div>
           </div>
         </details>
       )}
