@@ -166,10 +166,16 @@ const TopicHeading: React.FC<{ name: string; className?: string }> = ({ name, cl
   return <h2 className={"text-secondary font-mono " + className}>{name}</h2>;
 };
 
+const HIDE_AFTER_Y = 200;
+const SCROLL_DELTA_THRESHOLD = 6;
+
 const Header: React.FC = () => {
   const [scrollY, setScrollY] = React.useState(0);
+  const [visible, setVisible] = React.useState(true);
+  const [contextTitle, setContextTitle] = React.useState<string | null>(null);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [theme, setTheme] = React.useState("light");
+  const lastYRef = React.useRef(0);
 
   React.useEffect(() => {
     setTheme(document.documentElement.getAttribute("data-theme") || "light");
@@ -179,17 +185,38 @@ const Header: React.FC = () => {
     });
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
+    const contextEl = document.querySelector<HTMLElement>("[data-header-title]");
+    const contextText =
+      contextEl?.getAttribute("data-header-title") ||
+      contextEl?.textContent?.trim() ||
+      null;
+
     let ticking = false;
     function handleScroll() {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          setScrollY(window.scrollY);
-          ticking = false;
-        });
-        ticking = true;
-      }
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        setScrollY(y);
+
+        const delta = y - lastYRef.current;
+        if (y < HIDE_AFTER_Y) {
+          setVisible(true);
+        } else if (Math.abs(delta) > SCROLL_DELTA_THRESHOLD) {
+          setVisible(delta < 0);
+        }
+        lastYRef.current = y;
+
+        if (contextEl && contextText) {
+          const rect = contextEl.getBoundingClientRect();
+          setContextTitle(rect.bottom < 60 ? contextText : null);
+        }
+
+        ticking = false;
+      });
     }
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       observer.disconnect();
@@ -203,38 +230,62 @@ const Header: React.FC = () => {
     <>
       <header
         className={
-          "fixed top-0 w-full left-0 z-30 " + (scrolled ? "bg-secondary" : "")
+          "fixed top-0 w-full left-0 z-30 transition-transform duration-300 ease-out " +
+          (scrolled ? "bg-secondary shadow-md " : "") +
+          (visible ? "translate-y-0" : "-translate-y-full")
         }
       >
         <div
           className={
-            "py-4 pl-32 px-8 flex justify-between items-center w-[100rem] max-w-full mx-auto max-md:pl-8 max-md:hidden"
+            "py-4 pl-32 px-8 flex justify-between items-center gap-x-6 w-[100rem] max-w-full mx-auto max-md:pl-8 max-md:hidden"
           }
         >
-          <span>
-            <a href="/" className="text-base-content font-light">
+          <span className="flex items-center gap-x-4 min-w-0 shrink">
+            <a href="/" className="text-base-content font-light shrink-0">
               saiid.ch
             </a>
+            {contextTitle && (
+              <>
+                <span className="text-base-content/50 shrink-0" aria-hidden="true">
+                  /
+                </span>
+                <span
+                  className="text-base-content font-mono text-sm truncate"
+                  title={contextTitle}
+                >
+                  {contextTitle}
+                </span>
+              </>
+            )}
           </span>
 
           <Navigation scrolled={scrolled} />
 
-          <span className="flex gap-x-4">
+          <span className="flex gap-x-4 shrink-0">
             <CVDownloadButton accent={scrolled} />
             <ThemeToggle />
           </span>
         </div>
 
-        <div className="w-full hidden max-md:flex p-8 justify-between">
+        <div className="w-full hidden max-md:flex p-8 justify-between items-center gap-x-4">
           <button onClick={() => setDrawerOpen(true)} aria-label="Open menu">
             <constants.ICONS.MENU
               className="w-6 h-6"
               style={theme === "dark" ? { filter: "invert(1)" } : {}}
             />
           </button>
-          <a href="/" className="text-base-content font-light">
-            saiid.ch
-          </a>
+          {contextTitle ? (
+            <span
+              className="text-base-content font-mono text-sm truncate flex-1 text-center"
+              title={contextTitle}
+            >
+              {contextTitle}
+            </span>
+          ) : (
+            <a href="/" className="text-base-content font-light">
+              saiid.ch
+            </a>
+          )}
         </div>
       </header>
       <Drawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)}>

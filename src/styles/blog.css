@@ -14,14 +14,38 @@
 
 .blog h1 {
   @apply text-3xl font-mono font-bold text-base-content bg-gradient-to-r from-secondary/10 relative -left-10 pl-10 to-transparent mb-4 mt-12;
+  scroll-margin-top: 80px;
 }
 
 .blog h2 {
   @apply text-2xl font-mono font-bold text-secondary;
+  scroll-margin-top: 80px;
 }
 
 .blog h3 {
   @apply text-xl font-mono text-secondary;
+  scroll-margin-top: 80px;
+}
+
+.blog h1,
+.blog h2,
+.blog h3 {
+  position: relative;
+}
+
+.blog .heading-anchor {
+  @apply text-muted no-underline font-normal ml-2 opacity-0 transition-opacity;
+  font-weight: 400;
+}
+
+.blog h1:hover .heading-anchor,
+.blog h2:hover .heading-anchor,
+.blog h3:hover .heading-anchor {
+  @apply opacity-100;
+}
+
+.blog .heading-anchor:hover {
+  @apply text-secondary;
 }
 
 .blog p {

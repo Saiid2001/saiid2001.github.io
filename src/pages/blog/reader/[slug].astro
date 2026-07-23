@@ -1,0 +1,82 @@
+---
+import { getCollection, render } from 'astro:content';
+import ReaderToolbar from '../../../components/ReaderToolbar';
+import '../../../styles/reader.css';
+
+export async function getStaticPaths() {
+  const blogs = await getCollection('blogs');
+  return blogs.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+function estimateReadTime(body: string): number {
+  const words = (body ?? '').split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+const timeToRead = estimateReadTime(entry.body ?? '');
+const formattedDate = formatDate(entry.data.date);
+const fullHref = `/blog/${entry.data.slug}/`;
+---
+
+<!doctype html>
+<html lang="en" class="reader-mode reader-theme-light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{entry.data.title} — Reader</title>
+    <meta name="description" content={entry.data.summary} />
+    <link rel="canonical" href={fullHref} />
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem('reader-theme') || 'light';
+          var f = localStorage.getItem('reader-font');
+          document.documentElement.classList.remove(
+            'reader-theme-light',
+            'reader-theme-sepia',
+            'reader-theme-dark'
+          );
+          document.documentElement.classList.add('reader-theme-' + t);
+          if (f) document.documentElement.style.setProperty('--reader-font-size', [16, 18, 20, 22, 24, 26][parseInt(f, 10)] + 'px');
+        } catch (_) {}
+      })();
+    </script>
+  </head>
+  <body class="reader-mode">
+    <div class="reader-shell">
+      <ReaderToolbar backHref={fullHref} client:load />
+      <article class="reader-article">
+        <header>
+          <h1>{entry.data.title}</h1>
+          <div class="reader-meta">
+            <span>Saiid El Hajj Chehade</span>
+            <span>{formattedDate}</span>
+            <span>{timeToRead} min read</span>
+          </div>
+          {entry.data.summary && (
+            <p class="reader-summary">{entry.data.summary}</p>
+          )}
+        </header>
+        <div class="reader-content">
+          <Content />
+        </div>
+      </article>
+      <footer class="reader-footer">
+        <p>
+          Reader mode · <a href={fullHref}>View full article</a>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
