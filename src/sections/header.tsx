@@ -140,7 +140,7 @@ export const Navigation: React.FC<{ scrolled: boolean; vertical?: boolean }> = (
       >
         publications
       </a>
-      <a
+      {/* <a
         href="/projects/"
         className={
           "!font-light hover:underline " +
@@ -148,7 +148,7 @@ export const Navigation: React.FC<{ scrolled: boolean; vertical?: boolean }> = (
         }
       >
         projects
-      </a>
+      </a> */}
       <a
         href="/blog/"
         className={
