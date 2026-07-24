@@ -62,7 +62,7 @@
 }
 
 .blog p {
-  @apply text-lg mb-2 mt-2 indent-8;
+  @apply text-lg mb-2 mt-2 indent-8 text-justify;
 }
 
 .blog.no-indent p {
