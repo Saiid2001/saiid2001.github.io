@@ -20,8 +20,8 @@ const PrayerCountdownPrivacyPage: React.FC<PageProps> = (props) => {
             <strong>Developer:</strong> Saiid Hajj Chehade
             <br />
             <strong>Contact:</strong>{" "}
-            <a href="mailto:saidhajjchehade@gmail.com" className="underline">
-              saidhajjchehade@gmail.com
+            <a href="mailto:saiid.hajj@proton.me" className="underline">
+              saiid.hajj@proton.me
             </a>
           </p>
 
@@ -120,8 +120,8 @@ const PrayerCountdownPrivacyPage: React.FC<PageProps> = (props) => {
             <h2 className="text-2xl font-semibold mb-2">Contact</h2>
             <p>
               Questions or concerns:{" "}
-              <a href="mailto:saidhajjchehade@gmail.com" className="underline">
-                saidhajjchehade@gmail.com
+              <a href="mailto:saiid.hajj@proton.me" className="underline">
+                saiid.hajj@proton.me
               </a>
               .
             </p>
