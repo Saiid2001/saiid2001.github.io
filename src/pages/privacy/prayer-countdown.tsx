@@ -103,8 +103,12 @@ const PrayerCountdownPrivacyPage: React.FC<PageProps> = (props) => {
           <section>
             <h2 className="text-2xl font-semibold mb-2">Children</h2>
             <p>
-              The app is not directed at children under 13. No personal data is
-              collected from any user.
+              The app is safe for users of all ages. It contains no
+              advertising, no in-app purchases, no user-generated content, no
+              chat or communication features, and collects no personal data
+              from any user — including children. Because no personal data is
+              collected from anyone, the app raises no COPPA / GDPR-K concerns
+              for younger users.
             </p>
           </section>
 
