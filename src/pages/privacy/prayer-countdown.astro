@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SEO from '../../components/SEO.astro';
+
+const effectiveDate = "27 September 2026";
+const contactEmail = "saiid.hajj@proton.me";
+---
+
+<BaseLayout title="Prayer Countdown — Privacy | saiid.ch">
+  <Fragment slot="head">
+    <SEO
+      title="Prayer Countdown — Privacy Policy"
+      description="Privacy policy for the Prayer Countdown Wear OS app. No data collection, no analytics, no tracking."
+      path="/privacy/prayer-countdown/"
+      keywords="Prayer Countdown, Wear OS, Privacy Policy"
+    />
+  </Fragment>
+
+  <main class="privacy-page">
+    <h1>Privacy Policy</h1>
+
+    <p class="meta">
+      <strong>App:</strong> Prayer Countdown for Wear OS<br />
+      <strong>Effective date:</strong> {effectiveDate}<br />
+      <strong>Developer:</strong> Saiid Hajj Chehade<br />
+      <strong>Contact:</strong> <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+    </p>
+
+    <section>
+      <h2>Summary</h2>
+      <p>
+        Prayer Countdown is a standalone Wear OS app. It does not collect,
+        transmit, sell, or share any personal data. Everything the app needs
+        stays on your watch.
+      </p>
+    </section>
+
+    <section>
+      <h2>What the app accesses</h2>
+      <ul>
+        <li>
+          <strong>Coarse location.</strong> Used only to compute Islamic prayer
+          times for your current city. The coordinates are stored locally on
+          the watch (Android DataStore) and never leave the device. You can
+          enter a city manually instead.
+        </li>
+        <li>
+          <strong>Notifications.</strong> Required so the app can show reminders
+          before each prayer. No notification content is sent anywhere.
+        </li>
+        <li>
+          <strong>Exact alarms.</strong> Required so reminders fire at the
+          correct minute-before-prayer offsets. No data leaves the device.
+        </li>
+        <li>
+          <strong>Vibration and sensors (gyroscope).</strong> The gyroscope is
+          only read when a reminder screen is showing, to detect the
+          wrist-flick-to-snooze gesture. Readings are processed in memory and
+          discarded — nothing is stored or sent.
+        </li>
+        <li>
+          <strong>Background location (optional).</strong> If you grant it, the
+          app refreshes prayer times when you travel between cities without
+          needing to be opened. If you don't grant it, the app still works — it
+          just refreshes on next launch.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What the app does <em>not</em> do</h2>
+      <ul>
+        <li>No account, no login, no server backend.</li>
+        <li>No analytics, tracking, or telemetry.</li>
+        <li>No advertising SDKs.</li>
+        <li>
+          No third-party data sharing. The only network access is the one-time
+          reverse-geocoding call Android makes locally to turn coordinates into
+          a city name (via the on-device <code>Geocoder</code> API — this may
+          reach Google's geocoding service depending on the device
+          configuration; the app itself does not initiate any other network
+          requests).
+        </li>
+        <li>No collection of health, financial, contact, or messaging data.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Data retention</h2>
+      <p>
+        Location coordinates, city name, and app settings are stored on your
+        watch until you uninstall the app or clear its data through system
+        settings. There is no cloud copy to retain.
+      </p>
+    </section>
+
+    <section>
+      <h2>Children</h2>
+      <p>
+        The app is safe for users of all ages. It contains no advertising, no
+        in-app purchases, no user-generated content, no chat or communication
+        features, and collects no personal data from any user — including
+        children. Because no personal data is collected from anyone, the app
+        raises no COPPA / GDPR-K concerns for younger users.
+      </p>
+    </section>
+
+    <section>
+      <h2>Changes</h2>
+      <p>
+        Any material change to how the app handles data will be reflected on
+        this page and, where relevant, in the app's release notes.
+      </p>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p>
+        Questions or concerns:
+        <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+      </p>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .privacy-page {
+    max-width: 42rem;
+    margin: 8rem auto 6rem;
+    padding: 0 1.5rem;
+    line-height: 1.6;
+  }
+  .privacy-page h1 {
+    font-size: 2.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .privacy-page h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .privacy-page .meta {
+    font-size: 0.875rem;
+    opacity: 0.7;
+    margin-bottom: 2rem;
+  }
+  .privacy-page ul {
+    padding-left: 1.5rem;
+  }
+  .privacy-page li {
+    margin-bottom: 0.5rem;
+  }
+  .privacy-page code {
+    padding: 0.1rem 0.35rem;
+    border-radius: 0.25rem;
+    background: rgba(128, 128, 128, 0.15);
+    font-size: 0.9em;
+  }
+  .privacy-page a {
+    text-decoration: underline;
+  }
+</style>
